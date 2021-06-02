@@ -1,41 +1,69 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Container, Row, Col, Form, InputGroup, Button } from "react-bootstrap"
 import { Wrapper } from "./Login.styled"
 import Logo from "../../assets/images/logo.png"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { Formik } from "formik"
 import * as Yup from "yup"
-const Login = () => (
-  <Formik
-    initialValues={{ email: "", password: "" }}
-    onSubmit={(values, { setSubmitting }) => {
-      // eslint-disable-next-line no-console
-      console.log(values)
-      setTimeout(() => {
-        setSubmitting(true)
-      }, 5000)
-    }}
-    validationSchema={Yup.object().shape({
-      email: Yup.string()
-        .email("Invalid email format")
-        .required("Email is required"),
-      password: Yup.string()
-        .required("Password is required")
-        .min(8, "Password must has at least 8 characters")
-        .matches(/(?=.*[0-9])/, "Password must contain number")
-    })}
-  >
-    {props => {
-      const {
+import { useDispatch, useSelector } from "react-redux"
+import { clearState, loginUser, userSelector } from "./Login.slice"
+import toast, { Toaster } from "react-hot-toast"
+
+// eslint-disable-next-line no-empty-pattern
+const Login = ({}) => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const { isSuccess, isError, errorMessage } = useSelector(userSelector)
+
+  const onSubmit = data => {
+    dispatch(loginUser(data))
+  }
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearState())
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(errorMessage)
+      dispatch(clearState())
+    }
+
+    if (isSuccess) {
+      dispatch(clearState())
+      history.push("/")
+    }
+  }, [dispatch, errorMessage, history, isError, isSuccess])
+  return (
+    <Formik
+      initialValues={{ email: "", password: "" }}
+      onSubmit={values => {
+        let params = {
+          email: values.email,
+          password: values.password
+        }
+        onSubmit(params)
+      }}
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email("Invalid email format")
+          .required("Email is required"),
+        password: Yup.string()
+          .required("Password is required")
+          .min(8, "Password must has at least 8 characters")
+          .matches(/(?=.*[0-9])/, "Password must contain number")
+      })}
+    >
+      {({
         values,
         touched,
         errors,
-        isSubmitting,
         handleChange,
         handleBlur,
         handleSubmit
-      } = props
-      return (
+      }) => (
         <Wrapper>
           <Container className="container-login">
             <Row className="justify-content-center">
@@ -107,7 +135,6 @@ const Login = () => (
                       </Form.Row>
                       <Button
                         type="submit"
-                        disabled={isSubmitting}
                         className="btn btn-primary btn-block mb-2"
                       >
                         Login
@@ -116,6 +143,7 @@ const Login = () => (
                         <a href="#a"> Forgot your password?</a>
                         <Link to="/register"> Create password</Link>
                       </div>
+                      <Toaster position="bottom-right" reverseOrder={false} />
                     </Form>
                   </div>
                 </div>
@@ -123,9 +151,9 @@ const Login = () => (
             </Row>
           </Container>
         </Wrapper>
-      )
-    }}
-  </Formik>
-)
+      )}
+    </Formik>
+  )
+}
 
 export default Login

@@ -5,7 +5,7 @@ import { PostsItem } from "./PopularPostsItem.styles"
 export default function PopularPostsItem() {
   return (
     <PostsItem>
-      <Card.Text>
+      <Card.Text as="div">
         <Row>
           <Col xl={4} lg={4} md={4} sm={4} className="p-0">
             <a href="1" className="posts-item-image wrapper-image">
