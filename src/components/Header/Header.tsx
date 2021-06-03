@@ -19,6 +19,7 @@ const Header = () => {
 
   const user = useAppSelector(userSelector)
   const { email, name, isSuccess, role } = user
+  console.log(user)
 
   const handleScroll = () => {
     if (document.documentElement.scrollTop > 80) {

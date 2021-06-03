@@ -1,8 +1,10 @@
 import React from "react"
 import { Col } from "react-bootstrap"
+import { handleShowContent } from "src/helpers/handleContent"
 import { Item } from "./FeaturedItem.styles"
 
-const FeaturedItem: React.FC = () => {
+const FeaturedItem = ({ title, createdAt }) => {
+  const content = handleShowContent(title, 59)
   return (
     <Col xl={4} lg={4} md={12} sm={12} className="featured-items mb-4">
       <Item>
@@ -14,10 +16,8 @@ const FeaturedItem: React.FC = () => {
             />
           </span>
           <div className="entry-header entry-info">
-            <span className="entry-category"> Apple</span>
-            <h5 className="entry-title mt-3">
-              Opera Browser Lets You Apply Dark Mode to Web Page
-            </h5>
+            <span className="entry-category"> Technology</span>
+            <h5 className="entry-title mt-3">{content}</h5>
             <span className="entry-meta">
               <span className="entry-author">
                 <span className="sp"> by </span>
@@ -25,7 +25,7 @@ const FeaturedItem: React.FC = () => {
               </span>
               <span className="entry-time">
                 <span className="symbol">&bull;</span>
-                <time className="time"> July 30, 2020</time>
+                <time className={createdAt}> {createdAt}</time>
               </span>
             </span>
           </div>

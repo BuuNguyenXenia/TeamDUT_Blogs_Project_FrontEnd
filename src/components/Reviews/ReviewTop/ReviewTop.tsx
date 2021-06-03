@@ -2,7 +2,7 @@ import React from "react"
 import { Card } from "react-bootstrap"
 import { TopReview } from "./ReviewTop.styled"
 
-export default function ReviewTop() {
+export default function ReviewTop({ title, createdAt }) {
   return (
     <TopReview>
       <Card className="card-review-top">
@@ -11,11 +11,9 @@ export default function ReviewTop() {
           className="card-review-image"
         />
         <Card.Body className="card-review-body">
-          <Card.Title className="card-review-title">
-            10 Awesome Things to Try on Your PS4 Right Now
-          </Card.Title>
+          <Card.Title className="card-review-title">{title}</Card.Title>
           <Card.Text className="card-review-text">
-            by <span>Sora Blogging Tips</span> • July 30, 2020
+            by <span>Sora Blogging Tips</span> • {createdAt}
           </Card.Text>
         </Card.Body>
       </Card>

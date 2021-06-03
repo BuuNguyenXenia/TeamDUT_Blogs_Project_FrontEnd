@@ -1,8 +1,10 @@
 import React from "react"
 import { Card, Col, Row } from "react-bootstrap"
+import { handleShowContent } from "src/helpers/handleContent"
 import { ItemReview } from "./ReviewItem.styles"
 
-export default function ReviewItem() {
+export default function ReviewItem({ title, createdAt }) {
+  const content = handleShowContent(title, 50)
   return (
     <ItemReview>
       <Card className="card-review-item">
@@ -15,10 +17,10 @@ export default function ReviewItem() {
           <Col sm={8} className="p-0">
             <Card.Body className="card-review-body">
               <Card.Title className="card-review-title mb-1">
-                <a href="b">iPhone 11 Review: Phone Most People Should Buy</a>
+                <a href="b">{content}</a>
               </Card.Title>
-              <time dateTime="30-07-2020" className="wrapper-time">
-                July 30, 2020
+              <time dateTime={createdAt} className="wrapper-time">
+                {createdAt}
               </time>
             </Card.Body>
           </Col>
