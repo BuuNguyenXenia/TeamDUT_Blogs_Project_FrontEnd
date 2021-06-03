@@ -5,37 +5,29 @@ import Logo from "../../assets/images/logo.png"
 import { Link, useHistory } from "react-router-dom"
 import { Formik } from "formik"
 import * as Yup from "yup"
-import { useDispatch, useSelector } from "react-redux"
-import { clearState, loginUser, userSelector } from "./Login.slice"
+import { useAppSelector, useAppDispatch } from "../../store/hooks"
+import { clearState, loginUser, userSelector } from "../User/User.slice"
 import toast, { Toaster } from "react-hot-toast"
 
-// eslint-disable-next-line no-empty-pattern
-const Login = ({}) => {
-  const dispatch = useDispatch()
+const Login = () => {
+  const dispatch = useAppDispatch()
   const history = useHistory()
-  const { isSuccess, isError, errorMessage } = useSelector(userSelector)
+  const { isSuccess, isError, errorMessage } = useAppSelector(userSelector)
+  console.log(isError)
 
   const onSubmit = data => {
     dispatch(loginUser(data))
   }
 
   useEffect(() => {
-    return () => {
-      dispatch(clearState())
-    }
-  }, [dispatch])
-
-  useEffect(() => {
     if (isError) {
       toast.error(errorMessage)
       dispatch(clearState())
     }
-
     if (isSuccess) {
-      dispatch(clearState())
       history.push("/")
     }
-  }, [dispatch, errorMessage, history, isError, isSuccess])
+  }, [isError, isSuccess])
   return (
     <Formik
       initialValues={{ email: "", password: "" }}

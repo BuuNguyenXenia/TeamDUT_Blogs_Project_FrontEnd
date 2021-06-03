@@ -1,10 +1,8 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
-import userReducer from "src/pages/Login/Login.slice"
-import registerUserReducer from "src/pages/Register/Register.slice"
+import userReducer from "../pages/User/User.slice"
 
 const rootReducer = {
-  user: userReducer,
-  registerUser: registerUserReducer
+  user: userReducer
 }
 
 export const store = configureStore({

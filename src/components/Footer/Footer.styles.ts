@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const FooterBlogs = styled.div`
+  background-color: var(--header-bg);
   .primary-footer {
     position: relative;
     width: 100%;
@@ -20,6 +21,11 @@ export const FooterBlogs = styled.div`
   .footer-info {
     color: var(--black);
     font-weight: 600;
+    .footer-title {
+      font-size: 14px;
+      color: var(--footer-color);
+      margin: 0;
+    }
   }
   .linkList {
     .social-icons {

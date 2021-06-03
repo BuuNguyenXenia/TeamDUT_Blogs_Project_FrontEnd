@@ -4,20 +4,20 @@ import { Container, Row, Col, Form, Button, FormControl } from "react-bootstrap"
 import Logo from "../../assets/images/logo.png"
 import { Formik } from "formik"
 import * as Yup from "yup"
-import { useSelector, useDispatch } from "react-redux"
-import { RegisterUser, userSelector, clearState } from "./Register.slice"
+import { useAppSelector, useAppDispatch } from "../../store/hooks"
+import { registerUser, userSelector, clearState } from "../User/User.slice"
 import { useHistory } from "react-router-dom"
 import toast, { Toaster } from "react-hot-toast"
 
 const Register = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const history = useHistory()
-  const { isSuccess, isError, errorMessage } = useSelector(userSelector)
-  // eslint-disable-next-line no-console
+  const { isSuccess, isError, errorMessage } = useAppSelector(userSelector)
+
   console.log(isSuccess, isError, errorMessage)
 
   const onSubmit = data => {
-    dispatch(RegisterUser(data))
+    dispatch(registerUser(data))
   }
 
   useEffect(() => {
@@ -28,7 +28,6 @@ const Register = () => {
 
   useEffect(() => {
     if (isError) {
-      // eslint-disable-next-line no-console
       console.log(errorMessage)
 
       toast.error(errorMessage)
@@ -39,7 +38,7 @@ const Register = () => {
       dispatch(clearState())
       history.push("/login")
     }
-  }, [dispatch, errorMessage, history, isError, isSuccess])
+  }, [isError, isSuccess])
   return (
     <Formik
       initialValues={{
@@ -101,7 +100,7 @@ const Register = () => {
                     </p>
                     <Form onSubmit={handleSubmit}>
                       <Form.Row className="align-items-center">
-                        <Col sm={12} md={12} lg={12} xl={12} className="mb-3">
+                        <Col sm={12} className="mb-3">
                           <FormControl
                             name="email"
                             type="text"
@@ -119,7 +118,7 @@ const Register = () => {
                             </div>
                           )}
                         </Col>
-                        <Col sm={12} md={12} lg={12} xl={12} className="mb-3">
+                        <Col sm={12} className="mb-3">
                           <FormControl
                             name="userName"
                             type="text"
@@ -141,7 +140,7 @@ const Register = () => {
                           )}
                         </Col>
 
-                        <Col sm={12} md={12} lg={12} xl={12} className="mb-3">
+                        <Col sm={12} className="mb-3">
                           <Form.Control
                             name="password"
                             type="password"

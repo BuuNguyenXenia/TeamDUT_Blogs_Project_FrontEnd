@@ -15,12 +15,12 @@ const Footer: React.FC = () => {
               </div>
             </Col>
             <Col sm={12} md={12} lg={6} xl={6} className="footer-info">
-              <p className="m-0">
+              <p className="footer-title">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's.
               </p>
             </Col>
-            <Col sm={12} md={12} lg={4} xl={4} className="linkList">
+            <Col xs={12} sm={12} md={12} lg={4} xl={4} className="linkList">
               <ul className="social-icons m-0">
                 <li className="facebook">
                   <a href="facebook.com" target="_blank">

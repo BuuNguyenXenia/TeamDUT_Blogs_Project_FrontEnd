@@ -15,13 +15,12 @@ export const HeaderBlogs = styled.div`
   }
   .header-inner {
     max-width: 100%;
-  }
-  .show {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: auto;
   }
+
   .main-navbar {
     display: flex;
     justify-content: center;
@@ -37,6 +36,62 @@ export const HeaderBlogs = styled.div`
       background: transparent;
       font-size: 1.1em;
       font-weight: 500;
+    }
+  }
+  .dropdown-toggle {
+    cursor: pointer;
+    ::after {
+      content: "";
+      border: none;
+    }
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+  .dropdown-user_menu {
+    background-color: var(--post-card-bg);
+    padding: 0;
+    .user {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background-color: var(--post-card-bg);
+      img {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+      }
+      .user-infor {
+        font-size: 16px;
+        padding-left: 15px;
+      }
+      .user-email {
+        color: #5488c7;
+        font-weight: 700;
+        margin: 0;
+      }
+      .user-name {
+        color: #9b9b9b;
+        margin: 0;
+      }
+    }
+    .dropdown-divider {
+      border-top: 1px solid var(--border-color);
+    }
+  }
+
+  .link {
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    padding: 0.75rem 1rem;
+    outline: none;
+    color: #606266;
+    i {
+      padding-right: 15px;
     }
   }
 `

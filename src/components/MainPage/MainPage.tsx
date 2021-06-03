@@ -17,7 +17,7 @@ export default function MainPage() {
           <Reviews />
           <LatestNews />
         </Col>
-        <Col xl={4} lg={4} md={12} sm={12}>
+        <Col xl={4} lg={4} md={12} sm={12} className="mt-2">
           <SideBar />
         </Col>
       </Row>

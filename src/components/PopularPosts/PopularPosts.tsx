@@ -1,5 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Card } from "react-bootstrap"
+import { useSelector } from "react-redux"
+import { useAppDispatch } from "src/store/hooks"
 import { Posts } from "./PopularPosts.styles"
 import PopularPostsItem from "./PopularPostsItem/PopularPostsItem"
 

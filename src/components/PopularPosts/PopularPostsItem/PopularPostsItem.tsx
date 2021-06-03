@@ -7,7 +7,7 @@ export default function PopularPostsItem() {
     <PostsItem>
       <Card.Text as="div">
         <Row>
-          <Col xl={4} lg={4} md={4} sm={4} className="p-0">
+          <Col xs={4} className="p-0">
             <a href="1" className="posts-item-image wrapper-image">
               <img
                 src="https://1.bp.blogspot.com/-k_4VhcdaHds/XyMrIZP2mWI/AAAAAAAACb0/43LgXMLoZPEiVqOL1SUWKJMUIU3t0pd5QCLcBGAsYHQ/s1600/ify10.jpg"
@@ -15,7 +15,7 @@ export default function PopularPostsItem() {
               />
             </a>
           </Col>
-          <Col xl={8} lg={8} md={8} sm={8} className="posts-item-body">
+          <Col xs={8} className="posts-item-body">
             <h5 className="posts-item-title wrapper-title">
               <a href="2">
                 The 18 Practices for Building Responsive Web Applications

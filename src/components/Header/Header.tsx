@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react"
 import { HeaderBlogs, Logo, ThemeSwitch } from "./Header.styles"
 import logo from "../../assets/images/logo.png"
 import Search from "../Search/Search"
-import { Container } from "react-bootstrap"
-import { Link } from "react-router-dom"
-const Header: React.FC = () => {
+import { Container, Dropdown } from "react-bootstrap"
+import { Link, useHistory } from "react-router-dom"
+import { useAppSelector, useAppDispatch } from "../../store/hooks"
+import {
+  currentUser,
+  logoutUser,
+  userSelector
+} from "src/pages/User/User.slice"
+
+const Header = () => {
   const [toogle, setToggle] = useState<boolean>(false)
   const [scrollHeader, setScrollHeader] = useState<string>("notShadow")
+  const history = useHistory()
+  const dispatch = useAppDispatch()
+
+  const user = useAppSelector(userSelector)
+  const { email, name, isSuccess, role } = user
 
   const handleScroll = () => {
     if (document.documentElement.scrollTop > 80) {
@@ -20,6 +32,11 @@ const Header: React.FC = () => {
     setToggle(!toogle)
   }
 
+  const LogOutUser = () => {
+    dispatch(logoutUser())
+    history.push("/")
+  }
+
   useEffect(() => {
     toogle
       ? document.body.classList.add("dark")
@@ -30,13 +47,17 @@ const Header: React.FC = () => {
     window.onscroll = () => handleScroll()
   }, [scrollHeader])
 
+  useEffect(() => {
+    dispatch(currentUser())
+  }, [dispatch])
+
   return (
     <HeaderBlogs className="header">
       <div className={scrollHeader}>
         <Container>
-          <div className="header-inner show row">
+          <div className="header-inner row">
             <Logo
-              href="#"
+              href=""
               target="_blank"
               rel="noopener noreferrer"
               className="logo"
@@ -51,15 +72,62 @@ const Header: React.FC = () => {
                   onClick={nightMode}
                 ></span>
               </ThemeSwitch>
-              <Link to="/login">
-                <button
-                  type="button"
-                  className="el-button el-button--text ml-3"
-                >
-                  <i className="fas fa-sign-in-alt mr-1"></i>
-                  <span>Sign In/Sign up</span>
-                </button>
-              </Link>
+              {isSuccess ? (
+                <Dropdown className="ml-3">
+                  <Dropdown.Toggle as="div" id="dropdown-user">
+                    <img
+                      src="https://images.viblo.asia/120x120/a2ac1e41-bc36-48b4-b572-f2c1252a7e7a.jpg"
+                      alt="user avatar"
+                    />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu className="dropdown-user_menu">
+                    <div className="user">
+                      <img
+                        src="https://images.viblo.asia/120x120/a2ac1e41-bc36-48b4-b572-f2c1252a7e7a.jpg"
+                        alt="user avatar"
+                      />
+                      <div className="user-infor">
+                        <p className="user-email">{email}</p>
+                        <p className="user-name">@{name}</p>
+                      </div>
+                    </div>
+                    <Dropdown.Divider className="mt-0" />
+                    <Dropdown.Item href="" className="link link-plain">
+                      <i className="fa fa-user"></i>
+                      Profile
+                    </Dropdown.Item>
+                    <Dropdown.Item href="" className="link link-plain">
+                      <i className="fas fa-bell"></i>
+                      Notification
+                    </Dropdown.Item>
+                    {role === "admin" ? (
+                      <Dropdown.Item href="" className="link link-plain">
+                        <i className="fas fa-plus"></i>
+                        Add post
+                      </Dropdown.Item>
+                    ) : null}
+                    <Dropdown.Divider />
+                    <Dropdown.Item
+                      href=""
+                      className="link link-plain"
+                      onClick={LogOutUser}
+                    >
+                      <i className="fa fa-sign-out-alt"></i>
+                      Sign out
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              ) : (
+                <Link to="/login">
+                  <button
+                    type="button"
+                    className="el-button el-button--text ml-3"
+                  >
+                    <i className="fas fa-sign-in-alt mr-1"></i>
+                    <span>Sign In/Sign up</span>
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </Container>
