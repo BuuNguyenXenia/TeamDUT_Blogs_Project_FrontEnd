@@ -12,7 +12,7 @@ const LatestDeals: React.FC = () => {
           Latest Deals
         </Card.Header>
         <Card.Body className="deals-card-body">
-          <Card.Text>
+          <Card.Text as="div">
             <Row>
               <LatestDealsItem />
               <LatestDealsItem />

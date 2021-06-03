@@ -4,6 +4,7 @@ export const TopReview = styled.div`
   .card-review-top {
     border: 1px solid var(--border-color);
     background-color: var(--post-card-bg);
+    border-radius: var(--radius);
   }
   .card-review-image {
     border-top-right-radius: var(--radius);

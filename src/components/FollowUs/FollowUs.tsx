@@ -11,49 +11,25 @@ const FollowUs: React.FC = () => {
         </Card.Header>
         <Card.Body className="follow-card-body social-icons">
           <Row>
-            <Col
-              lg={6}
-              xl={6}
-              md={6}
-              sm={6}
-              className="social-icons-item pb-1 pr-1"
-            >
+            <Col className="social-icons-item pb-1 pr-1" xs={6}>
               <a href="facebook.com" className="facebook btn">
                 <i className="fab fa-facebook"></i>
                 <span className="text">Facebook</span>
               </a>
             </Col>
-            <Col
-              lg={6}
-              xl={6}
-              md={6}
-              sm={6}
-              className="social-icons-item pb-1 pl-1"
-            >
+            <Col className="social-icons-item pb-1 pl-1" xs={6}>
               <a href="twitter.com" className="twitter btn">
                 <i className="fab fa-twitter"></i>
                 <span className="text">Twitter</span>
               </a>
             </Col>
-            <Col
-              lg={6}
-              xl={6}
-              md={6}
-              sm={6}
-              className="social-icons-item pt-1 pr-1"
-            >
+            <Col className="social-icons-item pt-1 pr-1" xs={6}>
               <a href="youtube.com" className="youtube btn">
                 <i className="fab fa-youtube"></i>
                 <span className="text">Youtube</span>
               </a>
             </Col>
-            <Col
-              lg={6}
-              xl={6}
-              md={6}
-              sm={6}
-              className="social-icons-item pt-1 pl-1"
-            >
+            <Col xs={6} className="social-icons-item pt-1 pl-1">
               <a href="instagram.com" className="instagram btn">
                 <i className="fab fa-instagram"></i>
                 <span className="text">Instagram</span>

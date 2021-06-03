@@ -42,9 +42,4 @@ export const MainSearch = styled.div`
       }
     }
   }
-  @media (max-width: 768px) {
-    .search__input {
-      display: none;
-    }
-  }
 `

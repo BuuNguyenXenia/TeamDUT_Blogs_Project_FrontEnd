@@ -5,7 +5,7 @@ import LatestNewsItem from "./LatestNewsItem/LatestNewsItem"
 
 export default function LatestNews() {
   return (
-    <LatestNewsPage className="mt-3">
+    <LatestNewsPage className="mt-4">
       <div className="lasts-news-header">
         <h3 className="lasts-news-title">Latest News</h3>
         <a href="dd" className="view-all">
@@ -13,8 +13,8 @@ export default function LatestNews() {
         </a>
       </div>
       <div className="view-list">
-        <Row className="mt-3">
-          <Col xl={12} lg={12} md={12} sm={12}>
+        <Row className="mt-2">
+          <Col sm={12} xs={12}>
             <LatestNewsItem />
             <LatestNewsItem />
             <LatestNewsItem />
@@ -23,14 +23,9 @@ export default function LatestNews() {
             <LatestNewsItem />
           </Col>
         </Row>
-        <Row className="mt-3">
-          <Col
-            xl={{ span: 4, offset: 4 }}
-            lg={{ span: 4, offset: 4 }}
-            md={{ span: 4, offset: 4 }}
-            sm={{ span: 4, offset: 4 }}
-          >
-            <Button className="button-load-more ">Load more</Button>
+        <Row className="mt-3 mb-3">
+          <Col sm={{ span: 4, offset: 4 }} xs={{ span: 6, offset: 3 }}>
+            <Button className="button-load-more btn-block">Load more</Button>
           </Col>
         </Row>
       </div>

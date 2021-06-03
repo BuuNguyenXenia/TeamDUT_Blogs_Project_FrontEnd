@@ -10,10 +10,8 @@ export const ItemReview = styled.div`
     background-color: var(--post-card-bg);
   }
   .card-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 10px;
+    margin: 0px;
   }
   .card-image {
     display: block;
@@ -30,6 +28,7 @@ export const ItemReview = styled.div`
   .card-body {
     padding: 0;
     margin-left: 10px;
+    margin-top: 5px;
     small {
       color: var(--meta-color);
     }
