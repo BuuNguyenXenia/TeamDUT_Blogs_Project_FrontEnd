@@ -13,7 +13,6 @@ const Login = () => {
   const dispatch = useAppDispatch()
   const history = useHistory()
   const { isSuccess, isError, errorMessage } = useAppSelector(userSelector)
-  console.log(isError)
 
   const onSubmit = data => {
     dispatch(loginUser(data))
@@ -26,8 +25,10 @@ const Login = () => {
     }
     if (isSuccess) {
       history.push("/")
+      // dispatch(clearState())
     }
   }, [isError, isSuccess])
+
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
@@ -129,13 +130,13 @@ const Login = () => {
                         type="submit"
                         className="btn btn-primary btn-block mb-2"
                       >
-                        Login
+                        Sign in
                       </Button>
                       <div className="d-flex justify-content-between">
                         <a href="#a"> Forgot your password?</a>
                         <Link to="/register"> Create password</Link>
                       </div>
-                      <Toaster position="bottom-right" reverseOrder={false} />
+                      <Toaster />
                     </Form>
                   </div>
                 </div>

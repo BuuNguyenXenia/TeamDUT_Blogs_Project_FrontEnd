@@ -8,7 +8,6 @@ import PopularPostsItem from "./PopularPostsItem/PopularPostsItem"
 const PopularPosts = () => {
   const dispatch = useAppDispatch()
   const popularPosts = useAppSelector(popularPostsSelector)
-  console.log(popularPosts)
 
   const { isSuccess, current } = popularPosts
   useEffect(() => {

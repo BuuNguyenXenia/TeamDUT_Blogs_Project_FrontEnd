@@ -22,6 +22,7 @@ export const HeaderBlogs = styled.div`
   }
 
   .main-navbar {
+    font-size: 0.875em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,10 +89,16 @@ export const HeaderBlogs = styled.div`
     font-weight: 600;
     display: block;
     padding: 0.75rem 1rem;
+    margin: 0;
     outline: none;
     color: #606266;
     i {
       padding-right: 15px;
+    }
+    a {
+      padding: 0;
+      text-decoration: none;
+      color: #606266;
     }
   }
 `

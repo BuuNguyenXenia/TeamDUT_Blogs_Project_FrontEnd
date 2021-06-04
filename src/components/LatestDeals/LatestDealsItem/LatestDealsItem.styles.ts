@@ -9,4 +9,7 @@ export const DealsItem = styled.div`
     padding-left: 10px;
     padding-right: 16px;
   }
+  .deals-item-body {
+    margin-top: 8px;
+  }
 `

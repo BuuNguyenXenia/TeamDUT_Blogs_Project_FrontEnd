@@ -17,7 +17,7 @@ const FeaturedItem = ({ title, createdAt }) => {
           </span>
           <div className="entry-header entry-info">
             <span className="entry-category"> Technology</span>
-            <h5 className="entry-title mt-3">{content}</h5>
+            <h5 className="entry-title">{content}</h5>
             <span className="entry-meta">
               <span className="entry-author">
                 <span className="sp"> by </span>

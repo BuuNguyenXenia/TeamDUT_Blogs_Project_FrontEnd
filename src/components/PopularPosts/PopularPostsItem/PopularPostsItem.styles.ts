@@ -9,6 +9,6 @@ export const PostsItem = styled.div`
     padding: 0 0 0 12px;
   }
   .posts-item-title {
-    margin-top: 3px;
+    margin-top: 0px;
   }
 `

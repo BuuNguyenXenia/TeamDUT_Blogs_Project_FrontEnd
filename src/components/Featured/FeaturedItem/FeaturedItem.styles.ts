@@ -35,6 +35,7 @@ export const Item = styled.div`
     position: absolute;
     left: 10px;
     bottom: 15px;
+    margin: 5px 0px;
   }
   .entry-info {
     padding-left: 15px;
@@ -50,6 +51,8 @@ export const Item = styled.div`
     border-radius: 20px;
   }
   .entry-title {
+    margin: 5px 0;
+    font-size: 20px;
     font-weight: 700;
     z-index: 5;
   }
