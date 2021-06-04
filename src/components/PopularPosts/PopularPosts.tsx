@@ -1,11 +1,19 @@
 import React, { useEffect } from "react"
 import { Card } from "react-bootstrap"
-import { useSelector } from "react-redux"
-import { useAppDispatch } from "src/store/hooks"
+import { useAppDispatch, useAppSelector } from "src/store/hooks"
+import { getPopularPosts, popularPostsSelector } from "./PopularPost.slice"
 import { Posts } from "./PopularPosts.styles"
 import PopularPostsItem from "./PopularPostsItem/PopularPostsItem"
 
-export default function PopularPosts() {
+const PopularPosts = () => {
+  const dispatch = useAppDispatch()
+  const popularPosts = useAppSelector(popularPostsSelector)
+  console.log(popularPosts)
+
+  const { isSuccess, current } = popularPosts
+  useEffect(() => {
+    dispatch(getPopularPosts())
+  }, [])
   return (
     <Posts className="mb-4">
       <Card className="posts-card card-wrapper">
@@ -13,11 +21,15 @@ export default function PopularPosts() {
           Popular Posts
         </Card.Header>
         <Card.Body className="posts-card-body">
-          <PopularPostsItem />
-          <PopularPostsItem />
-          <PopularPostsItem />
+          {isSuccess
+            ? current.map((el, i) => (
+                <PopularPostsItem {...el} key={"poppular-post-item" + i} />
+              ))
+            : null}
         </Card.Body>
       </Card>
     </Posts>
   )
 }
+
+export default PopularPosts
