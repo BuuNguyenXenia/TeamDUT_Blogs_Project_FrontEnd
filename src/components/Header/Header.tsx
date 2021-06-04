@@ -6,10 +6,13 @@ import { Container, Dropdown } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../store/hooks"
 import {
+  clearState,
   currentUser,
   logoutUser,
   userSelector
 } from "src/pages/User/User.slice"
+import { PATH } from "src/constants/path"
+import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 
 const Header = () => {
   const [toogle, setToggle] = useState<boolean>(false)
@@ -35,6 +38,7 @@ const Header = () => {
 
   const LogOutUser = () => {
     dispatch(logoutUser())
+    dispatch(clearState())
     history.push("/")
   }
 
@@ -93,20 +97,25 @@ const Header = () => {
                       </div>
                     </div>
                     <Dropdown.Divider className="mt-0" />
-                    <Dropdown.Item href="" className="link link-plain">
-                      <i className="fa fa-user"></i>
-                      Profile
-                    </Dropdown.Item>
-                    <Dropdown.Item href="" className="link link-plain">
-                      <i className="fas fa-bell"></i>
-                      Notification
-                    </Dropdown.Item>
-                    {role === "admin" ? (
-                      <Dropdown.Item href="" className="link link-plain">
-                        <i className="fas fa-plus"></i>
-                        Add post
+                    {role === "user" ? (
+                      <>
+                        <Dropdown.Item href="" className="link link-plain">
+                          <i className="fa fa-user"></i>
+                          Profile
+                        </Dropdown.Item>
+                        <Dropdown.Item href="" className="link link-plain">
+                          <i className="fas fa-bell"></i>
+                          Notification
+                        </Dropdown.Item>
+                      </>
+                    ) : (
+                      <Dropdown.Item as="p" className="link link-plain">
+                        <Link to="/admin/addPost" className="link link-plain">
+                          <i className="fas fa-tasks"></i>
+                          Posts Management
+                        </Link>
                       </Dropdown.Item>
-                    ) : null}
+                    )}
                     <Dropdown.Divider />
                     <Dropdown.Item
                       href=""

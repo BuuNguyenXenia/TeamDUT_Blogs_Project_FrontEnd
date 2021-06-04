@@ -1,7 +1,10 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap");
+@import "semantic-ui-css/semantic.min.css";
 
 :root {
+  --date-color: rgba(0, 0, 0, 0.4);
+  --post-text-color: #3c4043;
   --button-bg: #1a73e8;
   --text-color: #3c4043;
   --post-card-bg: #ffffff;
@@ -24,6 +27,8 @@
 }
 
 .dark {
+  --date-color: rgba(255, 255, 255, 0.4);
+  --post-text-color: #b4b6ba;
   --button-bg: #1a73e8;
   --text-color: #b4b6ba;
   --post-card-bg: #202020;
@@ -44,7 +49,7 @@
 
 body {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   box-sizing: border-box;
   background-color: var(--outer-bg);
   font-family: "Raleway", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
@@ -85,8 +90,8 @@ body {
     display: none;
   }
 }
-// @media (max-width: 576px) {
-//   .header-title {
-//     font-size: 1.3em;
-//   }
-//}
+@media (max-width: 576px) {
+  body {
+    font-size: 14px;
+  }
+}

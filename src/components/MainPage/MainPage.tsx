@@ -5,6 +5,10 @@ import SideBar from "../SideBar/SideBar"
 import LatestNews from "../LatestNews/LatestNews"
 import Reviews from "../Reviews/Reviews"
 import { Main } from "./MainPage.styles"
+import { BrowserRouter, Route } from "react-router-dom"
+import Switch from "react-bootstrap/esm/Switch"
+import { PATH } from "src/constants/path"
+import ViewPostsItem from "../ViewAllPosts/ViewPostsItem/ViewPostsItem"
 
 export default function MainPage() {
   return (

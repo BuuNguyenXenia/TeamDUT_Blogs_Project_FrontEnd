@@ -26,13 +26,13 @@ export const LastsNewsItemPage = styled.div`
     }
   }
   .card-lastsNews-body {
-    padding: 5px 10px 5px;
+    padding: 10px 10px 5px;
     span {
       color: var(--meta-color);
     }
   }
   .card-lastsNews-title {
-    font-size: 20px;
+    font-size: 1.2em;
     display: block;
     color: var(--post-title-color);
     font-weight: 700;
@@ -46,11 +46,12 @@ export const LastsNewsItemPage = styled.div`
     }
   }
   .card-lastsNews-text {
-    font-size: 14px;
+    font-size: 0.875em;
     color: var(--text-color);
     margin: 8px 0px;
   }
   .card-lastsNews-author {
+    font-size: 0.875em;
     color: var(--meta-color);
     span {
       color: var(--main-color);

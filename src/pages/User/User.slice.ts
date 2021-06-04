@@ -13,20 +13,15 @@ export const loginUser = createAsyncThunk(
       }
       const response = await userApi.getToken(params)
       let data = await response.data
-      console.log("data login: ", data)
-
-      const refresh = data.refreshToken
-      const accessToken = data.accessToken
 
       if (response.status === 200) {
-        LocalStorageService.setItem("refresh", refresh)
-        LocalStorageService.setItem("accessToken", accessToken)
+        LocalStorageService.setItem("refreshToken", data.refreshToken)
+        LocalStorageService.setItem("accessToken", data.accessToken)
         return data
       } else {
         return thunkAPI.rejectWithValue(data)
       }
     } catch (e) {
-      console.log("Error: ", e.response.data)
       return thunkAPI.rejectWithValue(e.response.data)
     }
   }
@@ -62,8 +57,8 @@ export const registerUser = createAsyncThunk(
 export const currentUser = createAsyncThunk("user/current", async thunkAPI => {
   try {
     const response = await userApi.currentUser()
-    let data = await response.data
     if (response.status === 200) {
+      let data = response.data
       return data
     }
   } catch (e) {
@@ -92,6 +87,7 @@ const userSlice = createSlice({
     email: "",
     isSuccess: false,
     isError: false,
+    isFetching: false,
     errorMessage: "",
     role: ""
   },
@@ -107,7 +103,6 @@ const userSlice = createSlice({
     // login user
     [loginUser.fulfilled.type]: (state, { payload }) => {
       state.isSuccess = true
-      console.log(state.isSuccess)
       return state
     },
     [loginUser.rejected.type]: (state, { payload }) => {
@@ -125,7 +120,9 @@ const userSlice = createSlice({
       state.isError = true
       state.errorMessage = payload
     },
-    [logoutUser.pending.type]: state => {},
+    [logoutUser.pending.type]: state => {
+      state.isFetching = true
+    },
 
     //register user
     [registerUser.fulfilled.type]: (state, { payload }) => {
@@ -136,7 +133,9 @@ const userSlice = createSlice({
       state.isError = true
       state.errorMessage = payload
     },
-    [registerUser.pending.type]: state => {},
+    [registerUser.pending.type]: state => {
+      state.isFetching = true
+    },
 
     //get current user
     [currentUser.fulfilled.type]: (state, { payload }) => {
@@ -144,13 +143,15 @@ const userSlice = createSlice({
       state.email = payload.email
       state.role = payload.role
       state.isSuccess = true
+
       return state
     },
     [currentUser.rejected.type]: (state, { payload }) => {
       state.isSuccess = false
-      state.errorMessage = payload
     },
-    [currentUser.pending.type]: state => {}
+    [currentUser.pending.type]: state => {
+      state.isFetching = true
+    }
   }
 })
 

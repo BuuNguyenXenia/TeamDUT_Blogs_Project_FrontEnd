@@ -10,7 +10,7 @@ let refresh = LocalStorageService.getItem<string>("refresh")
 let accessToken = "Bearer " + LocalStorageService.getItem<string>("accessToken")
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:1337/api",
+  baseURL: "https://app-xenia.herokuapp.com/api",
   headers: {
     "x-refresh": refresh,
     Authorization: accessToken,
