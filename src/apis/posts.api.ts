@@ -5,7 +5,7 @@ const PostsApi = {
     const url = "/api/posts"
     return axiosClient.post(url, { params })
   },
-  get: id => {
+  getItemPosts: id => {
     const url = `/posts/${id}`
     return axiosClient.get(url)
   },
@@ -28,6 +28,18 @@ const PostsApi = {
   getReviews: () => {
     const url = "/posts?per_page=4&sort_by=-createdAt"
     return axiosClient.get(url)
+  },
+  searchPosts: value => {
+    const url = `/posts?search=${value}`
+    return axiosClient.get(url)
+  },
+  createComment: (_id, value) => {
+    const url = `/posts/${_id}`
+    return axiosClient.post(url, value)
+  },
+  createLike: _id => {
+    const url = `/likes/${_id}`
+    return axiosClient.post(url)
   }
 }
 

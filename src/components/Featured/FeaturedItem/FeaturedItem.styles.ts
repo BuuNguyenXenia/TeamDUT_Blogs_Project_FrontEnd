@@ -59,7 +59,7 @@ export const Item = styled.div`
   .entry-meta {
     text-shadow: 0 1px 2px rgb(0 0 0 / 35%);
     display: flex;
-    font-size: 12px;
+    font-size: 0.875em;
     color: #f5f5f5;
     font-weight: 400;
     .sp {
@@ -67,8 +67,6 @@ export const Item = styled.div`
     }
     .symbol {
       padding: 3px;
-    }
-    .author-name {
     }
   }
 `

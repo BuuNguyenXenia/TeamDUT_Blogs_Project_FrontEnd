@@ -1,5 +1,7 @@
 import React from "react"
 import { Card, Col, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { PATH } from "src/constants/path"
 import { Follow } from "./FollowUs.styles"
 
 const FollowUs: React.FC = () => {
@@ -12,28 +14,28 @@ const FollowUs: React.FC = () => {
         <Card.Body className="follow-card-body social-icons">
           <Row>
             <Col className="social-icons-item pb-1 pr-1" xs={6}>
-              <a href="facebook.com" className="facebook btn">
+              <Link to={PATH.NOT_FOUND} className="facebook btn">
                 <i className="fab fa-facebook"></i>
                 <span className="text">Facebook</span>
-              </a>
+              </Link>
             </Col>
             <Col className="social-icons-item pb-1 pl-1" xs={6}>
-              <a href="twitter.com" className="twitter btn">
+              <Link to={PATH.NOT_FOUND} className="twitter btn">
                 <i className="fab fa-twitter"></i>
                 <span className="text">Twitter</span>
-              </a>
+              </Link>
             </Col>
             <Col className="social-icons-item pt-1 pr-1" xs={6}>
-              <a href="youtube.com" className="youtube btn">
+              <Link to={PATH.NOT_FOUND} className="youtube btn">
                 <i className="fab fa-youtube"></i>
                 <span className="text">Youtube</span>
-              </a>
+              </Link>
             </Col>
             <Col xs={6} className="social-icons-item pt-1 pl-1">
-              <a href="instagram.com" className="instagram btn">
+              <Link to={PATH.NOT_FOUND} className="instagram btn">
                 <i className="fab fa-instagram"></i>
                 <span className="text">Instagram</span>
-              </a>
+              </Link>
             </Col>
           </Row>
         </Card.Body>

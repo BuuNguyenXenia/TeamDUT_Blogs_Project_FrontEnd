@@ -10,7 +10,7 @@ const Featured = () => {
 
   useEffect(() => {
     dispatch(getFeaturedPosts())
-  },[])
+  }, [])
   return (
     <React.Fragment>
       {isSuccess

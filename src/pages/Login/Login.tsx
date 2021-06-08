@@ -8,6 +8,7 @@ import * as Yup from "yup"
 import { useAppSelector, useAppDispatch } from "../../store/hooks"
 import { clearState, loginUser, userSelector } from "../User/User.slice"
 import toast, { Toaster } from "react-hot-toast"
+import { PATH } from "src/constants/path"
 
 const Login = () => {
   const dispatch = useAppDispatch()
@@ -20,12 +21,12 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(errorMessage)
       dispatch(clearState())
+      toast.error(errorMessage)
     }
     if (isSuccess) {
-      history.push("/")
-      // dispatch(clearState())
+      dispatch(clearState())
+      history.push(PATH.HOME)
     }
   }, [isError, isSuccess])
 
@@ -133,8 +134,8 @@ const Login = () => {
                         Sign in
                       </Button>
                       <div className="d-flex justify-content-between">
-                        <a href="#a"> Forgot your password?</a>
-                        <Link to="/register"> Create password</Link>
+                        <Link to={PATH.SEND_EMAIL}>Forgot your password?</Link>
+                        <Link to={PATH.REGISTER}> Create accounts</Link>
                       </div>
                       <Toaster />
                     </Form>

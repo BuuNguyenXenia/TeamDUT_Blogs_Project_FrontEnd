@@ -6,8 +6,9 @@ import { Formik } from "formik"
 import * as Yup from "yup"
 import { useAppSelector, useAppDispatch } from "../../store/hooks"
 import { registerUser, userSelector, clearState } from "../User/User.slice"
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import toast, { Toaster } from "react-hot-toast"
+import { PATH } from "src/constants/path"
 
 const Register = () => {
   const dispatch = useAppDispatch()
@@ -24,7 +25,7 @@ const Register = () => {
     return () => {
       dispatch(clearState())
     }
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     if (isError) {
@@ -33,10 +34,9 @@ const Register = () => {
       toast.error(errorMessage)
       dispatch(clearState())
     }
-
     if (isSuccess) {
       dispatch(clearState())
-      history.push("/login")
+      history.push(PATH.CHECK_MAIL_REGISTER)
     }
   }, [isError, isSuccess])
   return (
@@ -163,7 +163,7 @@ const Register = () => {
                           )}
                         </Col>
 
-                        <Col sm={12} md={12} lg={12} xl={12} className="mb-3">
+                        <Col sm={12} className="mb-3">
                           <Form.Control
                             name="confirmPassword"
                             type="password"
@@ -186,7 +186,7 @@ const Register = () => {
                               </div>
                             )}
                         </Col>
-                        <Col xs={12} md={12}>
+                        <Col xs={12}>
                           <Button
                             type="submit"
                             className="btn btn-primary btn-block mb-2"
@@ -197,6 +197,9 @@ const Register = () => {
                         <Toaster position="bottom-right" reverseOrder={false} />
                       </Form.Row>
                     </Form>
+                    <Link to={PATH.LOGIN} className="back-login">
+                      Back
+                    </Link>
                   </div>
                 </div>
               </Col>

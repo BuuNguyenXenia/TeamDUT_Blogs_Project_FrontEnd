@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import userApi from "src/apis/user.api"
-import { MSG } from "src/constants/showMsg"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 
 export const loginUser = createAsyncThunk(
@@ -12,20 +11,31 @@ export const loginUser = createAsyncThunk(
         password: user.password
       }
       const response = await userApi.getToken(params)
-      let data = await response.data
-
       if (response.status === 200) {
-        LocalStorageService.setItem("refreshToken", data.refreshToken)
-        LocalStorageService.setItem("accessToken", data.accessToken)
-        return data
+        LocalStorageService.setItem("refreshToken", response.data.refreshToken)
+        LocalStorageService.setItem("accessToken", response.data.accessToken)
+        return response.data
       } else {
-        return thunkAPI.rejectWithValue(data)
+        return thunkAPI.rejectWithValue(response.data)
       }
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response.data)
     }
   }
 )
+
+export const logoutUser = createAsyncThunk("user/logout", async thunkAPI => {
+  try {
+    const response = await userApi.logOut()
+    if (response.status === 200) {
+      LocalStorageService.removeItem("accessToken")
+      LocalStorageService.removeItem("refreshToken")
+      return response.data
+    }
+  } catch (error) {
+    throw error
+  }
+})
 
 export const registerUser = createAsyncThunk(
   "user/register",
@@ -39,17 +49,13 @@ export const registerUser = createAsyncThunk(
       }
       const response = await userApi.register(params)
 
-      let data = await response.data
-      // eslint-disable-next-line no-console
-      console.log("data register: ", data)
-
       if (response.status === 200) {
-        return data
+        return response.data
       } else {
-        return thunkAPI.rejectWithValue(data)
+        return thunkAPI.rejectWithValue(response.data)
       }
     } catch (e) {
-      return thunkAPI.rejectWithValue(MSG.REGISTER_ERROR)
+      return thunkAPI.rejectWithValue(e.response.data)
     }
   }
 )
@@ -57,34 +63,50 @@ export const registerUser = createAsyncThunk(
 export const currentUser = createAsyncThunk("user/current", async thunkAPI => {
   try {
     const response = await userApi.currentUser()
+
     if (response.status === 200) {
-      let data = response.data
-      return data
+      return response.data
     }
   } catch (e) {
-    throw e
+    throw new Error(e.message)
   }
 })
 
-export const logoutUser = createAsyncThunk("user/logout", async thunkAPI => {
-  try {
-    const response = await userApi.logOut()
-    let data = await response.data
-    if (response.status === 200) {
-      LocalStorageService.setItem("accessToken", "")
-      LocalStorageService.setItem("refreshToken", "")
-      return data
+interface updateUser {
+  name: string
+  email: string
+  urlUser: string
+}
+export const updateUserName = createAsyncThunk(
+  "user/updateName",
+  async (params: updateUser) => {
+    try {
+      const urlUser = params.urlUser
+      const request = {
+        name: params.name,
+        email: params.email
+      }
+      console.log(urlUser)
+      console.log(request.name)
+
+      const response = await userApi.updateUserName(urlUser, request)
+      console.log(response)
+
+      if (response.status === 200) {
+        return response.data
+      }
+    } catch (e) {
+      throw e
     }
-  } catch (error) {
-    throw error
   }
-})
+)
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
     name: "",
     email: "",
+    avatar: "",
     isSuccess: false,
     isError: false,
     isFetching: false,
@@ -95,6 +117,7 @@ const userSlice = createSlice({
     clearState: state => {
       state.isError = false
       state.isSuccess = false
+      state.isFetching = false
 
       return state
     }
@@ -107,23 +130,19 @@ const userSlice = createSlice({
     },
     [loginUser.rejected.type]: (state, { payload }) => {
       state.isError = true
+      console.log(payload)
+
       state.errorMessage = payload
     },
     [loginUser.pending.type]: state => {},
-
-    //logout user
     [logoutUser.fulfilled.type]: (state, { payload }) => {
+      state.name = ""
+      state.email = ""
+      state.role = ""
+      state.avatar = ""
       state.isSuccess = false
       return state
     },
-    [logoutUser.rejected.type]: (state, { payload }) => {
-      state.isError = true
-      state.errorMessage = payload
-    },
-    [logoutUser.pending.type]: state => {
-      state.isFetching = true
-    },
-
     //register user
     [registerUser.fulfilled.type]: (state, { payload }) => {
       state.isSuccess = true
@@ -131,10 +150,8 @@ const userSlice = createSlice({
     },
     [registerUser.rejected.type]: (state, { payload }) => {
       state.isError = true
+      state.isSuccess = false
       state.errorMessage = payload
-    },
-    [registerUser.pending.type]: state => {
-      state.isFetching = true
     },
 
     //get current user
@@ -142,15 +159,20 @@ const userSlice = createSlice({
       state.name = payload.username
       state.email = payload.email
       state.role = payload.role
+      state.avatar = payload.avatar
       state.isSuccess = true
+      state.isError = false
 
       return state
     },
     [currentUser.rejected.type]: (state, { payload }) => {
       state.isSuccess = false
+      state.isError = true
     },
-    [currentUser.pending.type]: state => {
-      state.isFetching = true
+
+    [updateUserName.fulfilled.type]: (state, { payload }) => {
+      state.name = payload.name
+      return state
     }
   }
 })

@@ -101,12 +101,12 @@ export const HeaderBlogs = styled.div`
       color: #606266;
     }
   }
-`
-export const Logo = styled.a`
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .logo {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 export const ThemeSwitch = styled.div`

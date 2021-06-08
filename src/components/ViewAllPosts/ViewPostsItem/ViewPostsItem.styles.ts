@@ -8,7 +8,8 @@ export const ViewItem = styled.div`
   .post-item-header {
     margin-top: 10px;
     margin-bottom: 20px;
-    font-size: 0.875em;
+    font-size: 1.1em;
+    font-weight: 500;
     .header {
       ::after {
         content: "\f054";
@@ -67,10 +68,22 @@ export const ViewItem = styled.div`
     flex-wrap: wrap;
     align-items: center;
     font-size: 14px;
-    i {
+    .like {
+      cursor: pointer;
       color: var(--main-color);
+    }
+    .active {
       font-weight: 400;
+    }
+    i {
       margin: 0 4px 0 0;
+    }
+    .comment {
+      i {
+        color: var(--main-color);
+        font-weight: 400;
+        margin: 0 4px 0 0;
+      }
     }
     span {
       color: var(--post-title-color);

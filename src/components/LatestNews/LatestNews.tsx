@@ -1,5 +1,7 @@
 import React, { useEffect } from "react"
 import { Button, Col, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { PATH } from "src/constants/path"
 import { useAppDispatch, useAppSelector } from "src/store/hooks"
 import { getLatestNews, latestNewsPostsSelector } from "./LatestNews.slice"
 import { LatestNewsPage } from "./LatestNews.styles"
@@ -18,9 +20,9 @@ export default function LatestNews() {
     <LatestNewsPage className="mt-4">
       <div className="lasts-news-header">
         <h3 className="lasts-news-title">Latest News</h3>
-        <a href="dd" className="view-all">
+        <Link to={PATH.ALL_POSTS} className="view-all">
           View all
-        </a>
+        </Link>
       </div>
       <div className="view-list">
         <Row className="mt-2">

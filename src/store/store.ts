@@ -5,13 +5,17 @@ import latestDealsReducer from "src/components/LatestDeals/LatestDeals.slice"
 import lastNewsReducer from "src/components/LatestNews/LatestNews.slice"
 import featuredReducer from "src/components/Featured/Featured.slice"
 import reviewsReducer from "src/components/Reviews/Reviews.slice"
+import searchReducer from "src/pages/SearchPage/Search.slice"
+import itemPostReducer from "src/components/ViewAllPosts/Posts.slice"
 const rootReducer = {
   user: userReducer,
   popularPosts: popularPostsReducer,
   latestDealsPosts: latestDealsReducer,
   latestNewsPosts: lastNewsReducer,
   featuredPosts: featuredReducer,
-  reviewsPosts: reviewsReducer
+  reviewsPosts: reviewsReducer,
+  dataSearch: searchReducer,
+  itemPost: itemPostReducer
 }
 
 export const store = configureStore({

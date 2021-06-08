@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react"
-import { HeaderBlogs, Logo, ThemeSwitch } from "./Header.styles"
+import { HeaderBlogs, ThemeSwitch } from "./Header.styles"
 import logo from "../../assets/images/logo.png"
 import Search from "../Search/Search"
 import { Container, Dropdown } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "../../store/hooks"
 import {
-  clearState,
   currentUser,
   logoutUser,
   userSelector
 } from "src/pages/User/User.slice"
 import { PATH } from "src/constants/path"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
+import { clearState } from "../ViewAllPosts/Posts.slice"
 
 const Header = () => {
   const [toogle, setToggle] = useState<boolean>(false)
   const [scrollHeader, setScrollHeader] = useState<string>("notShadow")
   const history = useHistory()
   const dispatch = useAppDispatch()
+  let accessToken: any = LocalStorageService.getItem<string>("accessToken")
+
+  const [token, setToken] = useState<string>(accessToken)
 
   const user = useAppSelector(userSelector)
-  const { email, name, isSuccess, role } = user
+  const { email, name, isSuccess, role, avatar } = user
   console.log(user)
 
   const handleScroll = () => {
@@ -39,7 +42,8 @@ const Header = () => {
   const LogOutUser = () => {
     dispatch(logoutUser())
     dispatch(clearState())
-    history.push("/")
+
+    history.push(PATH.HOME)
   }
 
   useEffect(() => {
@@ -53,22 +57,23 @@ const Header = () => {
   }, [scrollHeader])
 
   useEffect(() => {
-    dispatch(currentUser())
-  }, [dispatch])
+    console.log(isSuccess)
+
+    setToken(accessToken)
+    if (token) {
+      dispatch(currentUser())
+    }
+  }, [token])
+  console.log(user)
 
   return (
     <HeaderBlogs className="header">
       <div className={scrollHeader}>
         <Container>
           <div className="header-inner row">
-            <Logo
-              href=""
-              target="_blank"
-              rel="noopener noreferrer"
-              className="logo"
-            >
+            <Link to={PATH.HOME} className="logo">
               <img src={logo} alt="Blogs Technology" />
-            </Logo>
+            </Link>
             <Search />
             <div className="main-navbar">
               <ThemeSwitch>
@@ -80,17 +85,11 @@ const Header = () => {
               {isSuccess ? (
                 <Dropdown className="ml-3">
                   <Dropdown.Toggle as="div" id="dropdown-user">
-                    <img
-                      src="https://images.viblo.asia/120x120/a2ac1e41-bc36-48b4-b572-f2c1252a7e7a.jpg"
-                      alt="user avatar"
-                    />
+                    <img src={avatar} alt="user avatar" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="dropdown-user_menu">
                     <div className="user">
-                      <img
-                        src="https://images.viblo.asia/120x120/a2ac1e41-bc36-48b4-b572-f2c1252a7e7a.jpg"
-                        alt="user avatar"
-                      />
+                      <img src={avatar} alt="user avatar" />
                       <div className="user-infor">
                         <p className="user-email">{email}</p>
                         <p className="user-name">@{name}</p>
@@ -99,10 +98,18 @@ const Header = () => {
                     <Dropdown.Divider className="mt-0" />
                     {role === "user" ? (
                       <>
-                        <Dropdown.Item href="" className="link link-plain">
-                          <i className="fa fa-user"></i>
-                          Profile
-                        </Dropdown.Item>
+                        <Link to={PATH.USER_PROFILE}>
+                          <Dropdown.Item as="span" className="link link-plain">
+                            <i className="fa fa-user"></i>
+                            Profile
+                          </Dropdown.Item>
+                        </Link>
+                        <Link to={PATH.USER_SETTINGS}>
+                          <Dropdown.Item as="span" className="link link-plain">
+                            <i className="fas fa-cog"></i>
+                            Settings
+                          </Dropdown.Item>
+                        </Link>
                         <Dropdown.Item href="" className="link link-plain">
                           <i className="fas fa-bell"></i>
                           Notification
@@ -110,7 +117,10 @@ const Header = () => {
                       </>
                     ) : (
                       <Dropdown.Item as="p" className="link link-plain">
-                        <Link to="/admin/addPost" className="link link-plain">
+                        <Link
+                          to="/admin/manage-posts"
+                          className="link link-plain"
+                        >
                           <i className="fas fa-tasks"></i>
                           Posts Management
                         </Link>
@@ -118,7 +128,6 @@ const Header = () => {
                     )}
                     <Dropdown.Divider />
                     <Dropdown.Item
-                      href=""
                       className="link link-plain"
                       onClick={LogOutUser}
                     >

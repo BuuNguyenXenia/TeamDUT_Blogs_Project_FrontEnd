@@ -46,4 +46,25 @@ export const LatestNewsPage = styled.div`
       margin: 0 0 0 4px;
     }
   }
+
+  .post-all-header {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    font-weight: 500;
+    .header {
+      ::after {
+        content: "\f054";
+        font-family: "Font Awesome 5 Free";
+        font-size: 9px;
+        font-weight: 900;
+        font-style: normal;
+        vertical-align: middle;
+        margin: 0 4px;
+      }
+    }
+    span {
+      color: var(--meta-color);
+    }
+  }
 `
