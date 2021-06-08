@@ -1,25 +1,40 @@
-import React, { useEffect } from "react"
-import { useAppDispatch, useAppSelector } from "src/store/hooks"
-import { featuredPostsSelector, getFeaturedPosts } from "./Featured.slice"
-import FeaturedItem from "./FeaturedItem/FeaturedItem"
+import React from "react"
+import { FeaturedList } from "./Featured.styles"
+import FeaturedItem from "./FeaturedItem"
 
-const Featured = () => {
-  const dispatch = useAppDispatch()
-  const featuredPosts = useAppSelector(featuredPostsSelector)
-  const { current, isSuccess } = featuredPosts
-
-  useEffect(() => {
-    dispatch(getFeaturedPosts())
-  },[])
-  return (
-    <React.Fragment>
-      {isSuccess
-        ? current.map((el, i) => (
-            <FeaturedItem {...el} key={"featured-item" + i} />
-          ))
-        : null}
-    </React.Fragment>
-  )
+interface featuredList {
+  id: string
+  theme: string
+  title: string
+  author: string
 }
 
-export default Featured
+export default function Featured() {
+  const featuredList: Array<object> = [
+    {
+      id: "1",
+      theme: "Apple",
+      title: "Opera Browser Lets You Apply Dark Mode to Web Page",
+      author: "Sore Blogger",
+      dateSubmitted: "july 30, 2020"
+    },
+    {
+      id: "2",
+      theme: "Apple",
+      title: "Opera Browser Lets You Apply Dark Mode to Web Page",
+      author: "Sore Blogger",
+      dateSubmitted: "july 30, 2020"
+    },
+    {
+      id: "3",
+      theme: "Apple",
+      title: "Opera Browser Lets You Apply Dark Mode to Web Page",
+      author: "Sore Blogger",
+      dateSubmitted: "july 30, 2020"
+    }
+  ]
+  const data = featuredList.map((el, index) => (
+    <FeaturedItem {...el} key={"featured" + index} />
+  ))
+  return <FeaturedList>{data}</FeaturedList>
+}
