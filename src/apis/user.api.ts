@@ -1,4 +1,5 @@
 import axiosClient from "./axiosClient"
+import axiosUpload from "./axiosUploadImage"
 
 const userApi = {
   getToken: params => {
@@ -32,6 +33,14 @@ const userApi = {
   updatePassword: (name, params) => {
     const url = `/password/${name}`
     return axiosClient.put(url, params)
+  },
+  updateAvatar: (name, params) => {
+    const url = `/avatar/${name}`
+    return axiosClient.put(url, params)
+  },
+  uploadAvatar: params => {
+    const url = "/image/upload"
+    return axiosUpload.post(url, params)
   }
 }
 

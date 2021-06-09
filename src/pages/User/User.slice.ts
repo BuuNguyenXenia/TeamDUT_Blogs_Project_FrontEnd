@@ -101,6 +101,30 @@ export const updateUserName = createAsyncThunk(
   }
 )
 
+interface updateAvatar {
+  name: string
+  avatar: string
+}
+export const updateAvatarUser = createAsyncThunk(
+  "user/updateAvatar",
+  async (params: updateAvatar, thunkAPI) => {
+    try {
+      const name = params.name
+      const avatarUser = {
+        avatar: params.avatar
+      }
+      const response = await userApi.updateAvatar(name, avatarUser)
+      const data = await response.data
+
+      if (response.status === 200) {
+        return data
+      }
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data)
+    }
+  }
+)
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -173,6 +197,15 @@ const userSlice = createSlice({
     [updateUserName.fulfilled.type]: (state, { payload }) => {
       state.name = payload.name
       return state
+    },
+
+    [updateAvatarUser.fulfilled.type]: (state, { payload }) => {
+      state.avatar = payload.avatar
+      return state
+    },
+
+    [updateAvatarUser.rejected.type]: (state, { payload }) => {
+      state.errorMessage = payload
     }
   }
 })

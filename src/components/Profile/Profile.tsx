@@ -3,12 +3,17 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap"
 import toast, { Toaster } from "react-hot-toast"
 import { ProfileStyle } from "./Profile.styled"
 import { useAppDispatch, useAppSelector } from "src/store/hooks"
-import { updateUserName, userSelector } from "src/pages/User/User.slice"
+import {
+  updateAvatarUser,
+  updateUserName,
+  userSelector
+} from "src/pages/User/User.slice"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
-import axios from "axios"
-import { CONFIG } from "src/constants/config"
+import userApi from "src/apis/user.api"
+import { MSG } from "src/constants/showMsg"
+import avatarDefault from "src/assets/images/avatar.png"
 
 const Profile = () => {
   const user = useAppSelector(userSelector)
@@ -56,9 +61,7 @@ const Profile = () => {
 
   //----------------------------------------------
 
-  const [profileImg, setProfileImg] = useState<string>(
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-  )
+  const [profileImg, setProfileImg] = useState<string>(avatarDefault)
   const [image, setImage] = useState<any>(null)
 
   const imageHandler = e => {
@@ -74,6 +77,7 @@ const Profile = () => {
   }
 
   const [show, setShow] = useState(false)
+
   const handleClose = () => {
     setShow(false)
   }
@@ -81,21 +85,28 @@ const Profile = () => {
 
   const imageUploadToImgur = async (image: any) => {
     try {
-      console.log(image)
+      const formData = new FormData()
 
-      let formData = new FormData()
-      formData.append("image", image)
+      formData.append("file", image)
+      formData.append("tags", `codeinfuse, medium, gist`)
+      formData.append("upload_preset", "rhy123")
+      formData.append("api_key", "954397545867351")
 
-      const res = await axios.post("https://api.imgur.com/3/image", formData, {
-        headers: {
-          Accept: "application/form-data",
-          Authorization: `Client-ID ${CONFIG.CLIENT}`
+      const response = await userApi.uploadAvatar(formData)
+      const data = await response.data
+
+      if (response.status === 200) {
+        const params = {
+          name: name,
+          avatar: data.secure_url
         }
-      })
-      console.log(res)
+        dispatch(updateAvatarUser(params))
+        toast.success(MSG.UPDATE_AVATAR_SUCCESS)
+        setProfileImg(avatarDefault)
+        setShow(false)
+      }
     } catch (err) {
-      console.log(err)
-      return err
+      toast.error(err.response.data)
     }
   }
 
@@ -151,7 +162,6 @@ const Profile = () => {
 
                 <input
                   type="file"
-                  accept="image/png, image/jpeg"
                   name="image-upload"
                   id="input"
                   onChange={imageHandler}
