@@ -49,4 +49,20 @@ export const ProfileStyle = styled.div`
   .error {
     color: var(--red);
   }
+  .change-avatar {
+    position: absolute;
+    right: 8px;
+    bottom: 0px;
+    background-color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    i {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 `

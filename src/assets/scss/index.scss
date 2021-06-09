@@ -57,12 +57,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 @media (max-width: 1200px) {
   .social-icons {
     a {
       i {
         padding: 0 5px !important;
       }
+
       span {
         padding: 0 7px !important;
       }
@@ -77,13 +79,16 @@ body {
     align-items: center;
     flex-direction: column;
   }
+
   .footer-info {
     text-align: center;
     margin: 20px 0;
   }
+
   .footer-logo {
     text-align: center;
   }
+
   .linkList {
     ul {
       padding: 0;
@@ -98,8 +103,63 @@ body {
     display: none;
   }
 }
+
 @media (max-width: 576px) {
   body {
     font-size: 14px;
   }
+}
+
+.modal-dialog {
+  margin-top: 150px;
+}
+
+.page {
+
+  color: #606266;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+
+.img-holder {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  margin-bottom: 5px;
+
+}
+
+.img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border: 2px solid #dadce0;
+}
+
+#input[type="file"] {
+  display: none;
+}
+
+.button-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  .btn-outline-info {
+    padding: 3px 20px;
+  }
+}
+
+.image-upload {
+  margin: auto;
+  width: 200px;
+  height: 50px;
+  color: white;
+  border-radius: 10px;
+  background-color: black;
+  text-align: center;
+  cursor: pointer;
 }

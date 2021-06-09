@@ -5,7 +5,7 @@ import Logo from "../../assets/images/logo.png"
 import { Formik } from "formik"
 import * as Yup from "yup"
 import toast, { Toaster } from "react-hot-toast"
-import { Link, useParams } from "react-router-dom"
+import { Link, useHistory, useParams } from "react-router-dom"
 import userApi from "src/apis/user.api"
 import { MSG } from "../../constants/showMsg"
 import { PATH } from "../../constants/path"
@@ -15,6 +15,7 @@ interface RouteParams {
 }
 
 const ResetPassword = () => {
+  const history = useHistory()
   const urlLink = useParams<RouteParams>()
   console.log(urlLink)
 
@@ -29,6 +30,7 @@ const ResetPassword = () => {
       const response = await userApi.resetPassword(params)
       if (response.status === 200) {
         toast.success(MSG.FORGOT_PASSWORD_SUCCESS)
+        history.push(PATH.LOGIN)
       }
     } catch (err) {
       toast.error(err.response.data)
