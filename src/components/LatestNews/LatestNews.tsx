@@ -11,6 +11,7 @@ export default function LatestNews() {
   const dispatch = useAppDispatch()
   const latestNewsPosts = useAppSelector(latestNewsPostsSelector)
   const { current, isSuccess } = latestNewsPosts
+  console.log(current)
 
   useEffect(() => {
     dispatch(getLatestNews())

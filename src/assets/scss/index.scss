@@ -1,7 +1,7 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap");
 @import "semantic-ui-css/semantic.min.css";
-
+@import 'react-quill/dist/quill.snow.css';
 :root {
   --date-color: rgba(0, 0, 0, 0.4);
   --post-text-color: #3c4043;
@@ -56,6 +56,10 @@ body {
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  object-fit: cover;
 }
 
 @media (max-width: 1200px) {

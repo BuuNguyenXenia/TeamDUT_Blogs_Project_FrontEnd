@@ -12,7 +12,13 @@ import { urlPostItem } from "src/common/Handle/handlePosts"
 import { formatDate } from "src/helpers/date"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 
-export default function LatestNewsItem({ title, body, createdAt, postId }) {
+export default function LatestNewsItem({
+  title,
+  body,
+  createdAt,
+  postId,
+  image
+}) {
   const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
@@ -34,7 +40,7 @@ export default function LatestNewsItem({ title, body, createdAt, postId }) {
               className="card-lastsNews-image"
               onClick={() => handleItemPost(postId)}
             >
-              <Card.Img src="https://1.bp.blogspot.com/-rAW7PxEXqww/XyMprSiTVgI/AAAAAAAACa8/FH8QpXwQahIiB53ALEBDIf_L1yMv2_yUACLcBGAsYHQ/s1600/ify5.jpg" />
+              <Card.Img src={image} />
             </Link>
           </Col>
           <Col xl={8} lg={8} md={8} sm={8} className="p-0">
@@ -44,7 +50,10 @@ export default function LatestNewsItem({ title, body, createdAt, postId }) {
                   {title}
                 </Link>
               </Card.Title>
-              <Card.Text className="card-lastsNews-text">{content}</Card.Text>
+              <Card.Text className="card-lastsNews-text">
+                {" "}
+                <div dangerouslySetInnerHTML={{ __html: content }}></div>
+              </Card.Text>
               <span className="card-lastsNews-author">
                 by <span>Team DUT</span> • {creatDate}
               </span>

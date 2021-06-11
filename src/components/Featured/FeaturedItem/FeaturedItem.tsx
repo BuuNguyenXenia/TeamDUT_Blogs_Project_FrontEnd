@@ -10,7 +10,7 @@ import { Item } from "./FeaturedItem.styles"
 import { formatDate } from "src/helpers/date"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 
-const FeaturedItem = ({ title, createdAt, postId }) => {
+const FeaturedItem = ({ title, createdAt, postId, image }) => {
   const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
@@ -32,10 +32,7 @@ const FeaturedItem = ({ title, createdAt, postId }) => {
           onClick={() => handleItemPost(postId)}
         >
           <span className="item-images entry-image-wrap">
-            <img
-              src="https://1.bp.blogspot.com/-lNDLOkYVctM/XyMrR9hlGrI/AAAAAAAACb8/kfHY383L6UMezRamt-tByetKTlxgT05vQCLcBGAsYHQ/s1600/ify12.jpg"
-              alt="apple"
-            />
+            <img src={image} alt="apple" />
           </span>
           <div className="entry-header entry-info">
             <span className="entry-category"> Technology</span>
