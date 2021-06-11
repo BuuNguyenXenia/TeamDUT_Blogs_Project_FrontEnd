@@ -1,26 +1,51 @@
-import React from "react"
+import React, { useState } from "react"
 import { Card, Col, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { urlPostItem } from "src/common/Handle/handlePosts"
+import {
+  clearState,
+  itemPostThunk
+} from "src/components/ViewAllPosts/Posts.slice"
+import { formatDate } from "src/helpers/date"
+import LocalStorageService from "src/services/LocalStorageService/Storage.service"
+import { useAppDispatch } from "src/store/hooks"
 import { PostsItem } from "./PopularPostsItem.styles"
 
-export default function PopularPostsItem({ title, createdAt }) {
+export default function PopularPostsItem({ title, createdAt, postId }) {
+  const [urlPost] = useState<string>(urlPostItem(title))
+  const dispatch = useAppDispatch()
+
+  const creatDate = formatDate(createdAt)
+
+  const handleItemPost = (_id: string) => {
+    LocalStorageService.setItem("urlPost", title)
+    dispatch(itemPostThunk(_id))
+    dispatch(clearState())
+  }
   return (
     <PostsItem>
       <Card.Text as="div">
         <Row>
           <Col xs={4} className="p-0">
-            <a href="1" className="posts-item-image wrapper-image">
+            <Link
+              to={urlPost}
+              className="posts-item-image wrapper-image"
+              onClick={() => handleItemPost(postId)}
+            >
               <img
                 src="https://1.bp.blogspot.com/-k_4VhcdaHds/XyMrIZP2mWI/AAAAAAAACb0/43LgXMLoZPEiVqOL1SUWKJMUIU3t0pd5QCLcBGAsYHQ/s1600/ify10.jpg"
                 alt="img"
               />
-            </a>
+            </Link>
           </Col>
           <Col xs={8} className="posts-item-body">
             <h5 className="posts-item-title wrapper-title">
-              <a href="2">{title}</a>
+              <Link to={urlPost} onClick={() => handleItemPost(postId)}>
+                {title}
+              </Link>
             </h5>
             <time className="posts-item-time wrapper-time" dateTime={createdAt}>
-              {createdAt}
+              {creatDate}
             </time>
           </Col>
         </Row>

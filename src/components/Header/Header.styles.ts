@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const HeaderBlogs = styled.div`
   position: fixed;
   top: 0;
-  z-index: 9999999;
+  z-index: 999;
   float: left;
   width: 100%;
   height: 80px;
@@ -101,12 +101,12 @@ export const HeaderBlogs = styled.div`
       color: #606266;
     }
   }
-`
-export const Logo = styled.a`
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .logo {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 export const ThemeSwitch = styled.div`

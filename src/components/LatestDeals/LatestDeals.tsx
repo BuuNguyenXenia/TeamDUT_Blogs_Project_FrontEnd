@@ -16,7 +16,7 @@ const LatestDeals = () => {
 
   useEffect(() => {
     dispatch(getLatestDealsPosts())
-  }, [dispatch])
+  }, [])
   return (
     <Deals>
       <Card className="deals-card card-wrapper">

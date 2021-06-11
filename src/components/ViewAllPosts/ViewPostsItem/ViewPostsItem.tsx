@@ -1,19 +1,50 @@
-import React from "react"
-import { ViewItem } from "./ViewPosts.styles"
+import React, { useEffect, useState } from "react"
+import { ViewItem } from "./ViewPostsItem.styles"
 import CommentsPost from "../Comments/CommentsPost"
+import { PATH } from "src/constants/path"
+import { Link } from "react-router-dom"
+import LocalStorageService from "src/services/LocalStorageService/Storage.service"
+import { useAppDispatch, useAppSelector } from "src/store/hooks"
+import { userSelector } from "src/pages/User/User.slice"
+import { createLikePost } from "../Posts.slice"
+import toast from "react-hot-toast"
+import { MSG } from "src/constants/showMsg"
+import { formatDate } from "src/helpers/date"
+
 const ViewPostsItem = () => {
+  const dataPost: any = LocalStorageService.getItem<object>("itemPost")
+  const user = useAppSelector(userSelector)
+  const dispatch = useAppDispatch()
+
+  const [checkLike, setCheckLike] = useState<string>("")
+
+  const { title, body, comments, likes, createdAt, postId } = dataPost
+  const date = formatDate(createdAt)
+
+  const handleLikePost = _id => {
+    if (user.isSuccess) {
+      dispatch(createLikePost(_id))
+      console.log(checkLike)
+    } else {
+      toast.error(MSG.NOT_LOGIN_ERROR)
+    }
+  }
+
+  useEffect(() => {
+    const checkName = likes.data.filter(el => el === user.name)
+    setCheckLike(checkName)
+  }, [user])
+
   return (
     <ViewItem>
       <div className="post-item">
         <div className="post-item-header">
-          <a href="1" className="header">
+          <Link to={PATH.HOME} className="header">
             Home
-          </a>
+          </Link>
           <span> Post </span>
         </div>
-        <h2 className="post-item-title ">
-          The 18 Practices for Building Responsive Web Applications
-        </h2>
+        <h2 className="post-item-title ">{title}</h2>
       </div>
       <div className="post-item-meta">
         <div className="post-item-author">
@@ -23,18 +54,24 @@ const ViewPostsItem = () => {
           />
           <span>
             by
-            <span className="author"> Sora Blogging Tips </span> •
-            <time dateTime="21-12-2002"> July 30, 2020</time>
+            <span className="author"> Team DUT </span> •
+            <time dateTime={createdAt}> {date}</time>
           </span>
         </div>
         <div className="post-item-countComment">
-          <div className="like">
-            <i className="fas fa-thumbs-up"></i>
-            <span className="count">12</span>
+          <div className="like" onClick={() => handleLikePost(postId)}>
+            <i
+              className={
+                checkLike.length === 1
+                  ? "fas fa-thumbs-up"
+                  : "fas fa-thumbs-up active"
+              }
+            ></i>
+            <span className="count">{likes.counts}</span>
           </div>
           <div className="comment ml-3">
             <i className="far fa-comments"></i>
-            <span className="count">12</span>
+            <span className="count">{comments.counts}</span>
           </div>
         </div>
       </div>
@@ -46,40 +83,11 @@ const ViewPostsItem = () => {
           />
         </div>
         <div className="body-content">
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. Lorem Ipsum has been
-            the industry's standard dummy text ever since the 1500s, when an
-            unknown printer took a galley of type and scrambled it to make a
-            type specimen book. - John Doe It was popularised in the 1960s with
-            the release of Letraset sheets containing Lorem Ipsum passages, and
-            more recently with desktop publishing software like Aldus PageMaker
-            including versions of Lorem Ipsum. Lorem Ipsum has been the
-            industry's The generated Lorem Ipsum is therefore always Making this
-            the first true generator It is a long established fact that a reader
-            will be distracted by the readable content of a page when looking at
-            its layout.
-          </p>
-          <p>
-            The point of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as opposed to using 'Content here, content
-            here', making it look like readable English. It uses a dictionary of
-            over 200 Latin words, combined with a handful of model sentence
-            structures, to generate Lorem Ipsum which looks reasonable. The
-            generated Lorem Ipsum is therefore always free from repetition,
-            injected humour, or non-characteristic words etc. There are many
-            variations of passages of Lorem Ipsum available, but the majority
-            have suffered alteration in some form, by injected humour, or
-            randomised words which don't look even slightly believable. If you
-            are going to use a passage of Lorem Ipsum, you need to be sure there
-            isn't anything embarrassing hidden in the middle of text.
-          </p>
+          <p>{body}</p>
         </div>
         <div className="comments-posts">
           <p className="header-comment">Post a Comment</p>
-          <CommentsPost />
+          <CommentsPost {...dataPost} />
         </div>
       </div>
     </ViewItem>

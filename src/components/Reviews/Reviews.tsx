@@ -1,5 +1,7 @@
 import React, { useEffect } from "react"
 import { Col, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { PATH } from "src/constants/path"
 import { useAppDispatch, useAppSelector } from "src/store/hooks"
 import ReviewItem from "./ReviewItem/ReviewItem"
 import { getReviewsPosts, reviewsPostsSelector } from "./Reviews.slice"
@@ -14,19 +16,24 @@ export default function Reviews() {
   useEffect(() => {
     dispatch(getReviewsPosts())
   }, [])
-
   return (
     <ReviewsList>
       <div className="header-reviews">
         <h3 className="header-title">Reviews</h3>
-        <a href="dd" className="view-all">
+        <Link to={PATH.ALL_POSTS} className="view-all">
           View all
-        </a>
+        </Link>
       </div>
       <div className="view-list">
         <Row>
           <Col xl={6} lg={6} md={12} sm={12} className="mt-3">
-            <ReviewTop {...current[0]} />
+            {isSuccess
+              ? current
+                  .slice(1, 2)
+                  .map((el, i) => (
+                    <ReviewTop {...el} key={"reviewsTop-item" + i} />
+                  ))
+              : null}
           </Col>
           <Col xl={6} lg={6} md={12} sm={12} className="mt-3">
             {isSuccess

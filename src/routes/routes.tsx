@@ -1,14 +1,17 @@
 import React from "react"
 import { BrowserRouter } from "react-router-dom"
 import HomePageRoutes from "./HomePageRoutes"
-import LoginRoutes from "./LoginRoutes"
-import RegisterRoutes from "./RegisterRoutes"
+import LoginRoute from "./LoginRoute"
+import RegisterRoute from "./RegisterRoute"
+import ScrollTopRoute from "./ScrollTopRoute"
+
 export default function Routes() {
   return (
     <BrowserRouter>
+      <ScrollTopRoute />
       <HomePageRoutes />
-      <LoginRoutes />
-      <RegisterRoutes />
+      <LoginRoute />
+      <RegisterRoute />
     </BrowserRouter>
   )
 }

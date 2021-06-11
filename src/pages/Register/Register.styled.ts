@@ -26,4 +26,20 @@ export const Wrapper = styled.div`
       box-shadow: 0 0 0 0.2rem rgb(255 0 0 / 25%);
     }
   }
+  .back-login {
+    float: right;
+    font-size: 1em;
+    margin: 10px 0px;
+    ::after {
+      content: "\f054";
+      font-family: "Font Awesome 5 Free";
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      margin: 2px 0 0 3px;
+    }
+    :hover {
+      text-decoration: underline;
+    }
+  }
 `

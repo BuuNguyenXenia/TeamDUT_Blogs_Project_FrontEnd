@@ -5,23 +5,27 @@ import LocalStorageService from "src/services/LocalStorageService/Storage.servic
 
 // Set up default config for http requests here
 // Please have a look at here `https://github.com/axios/axios#request-config` for the full list of configs
-
-let refresh = LocalStorageService.getItem<string>("refresh")
-let accessToken = "Bearer " + LocalStorageService.getItem<string>("accessToken")
+// "https://app-xenia.herokuapp.com/api"
 
 const axiosClient = axios.create({
   baseURL: "https://app-xenia.herokuapp.com/api",
   headers: {
-    "x-refresh": refresh,
-    Authorization: accessToken,
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
-    "X-Requested-With": "XMLHttpRequest"
+    "Content-Type": "application/json"
   },
   paramsSerializer: params => queryString.stringify(params)
 })
 axiosClient.interceptors.request.use(async config => {
   // Handle token here ...
+  let refresh = LocalStorageService.getItem<string>("refreshToken")
+  let accessToken = LocalStorageService.getItem<string>("accessToken")
+  if (accessToken) {
+    config.headers = {
+      "x-refresh": refresh,
+      Authorization: "Bearer " + accessToken,
+      "Content-Type": "application/json"
+    }
+  }
+
   return config
 })
 axiosClient.interceptors.response.use(
