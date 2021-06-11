@@ -4,5 +4,7 @@ export const MSG = {
   EMAIL_ERROR: "The email and name was registered",
   CHANGE_PASSWORD_SUCCESS: "Change password successfully",
   FORGOT_PASSWORD_SUCCESS: "Successful, please come back to login",
-  UPDATE_AVATAR_SUCCESS: "Update avatar successfully"
+  UPDATE_AVATAR_SUCCESS: "Update avatar successfully",
+  CREATE_NEW_POST_SUCCESS: "Created Post Successfully",
+  CREATE_NEW_POST_ERROR: "Body is too short - should be 120 chars minimum"
 }

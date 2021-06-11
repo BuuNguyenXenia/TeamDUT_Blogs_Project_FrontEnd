@@ -13,7 +13,7 @@ import LocalStorageService from "src/services/LocalStorageService/Storage.servic
 import { useAppDispatch } from "src/store/hooks"
 import { ItemReview } from "./ReviewItem.styles"
 
-export default function ReviewItem({ title, createdAt, postId }) {
+export default function ReviewItem({ title, createdAt, postId, image }) {
   const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
@@ -35,7 +35,7 @@ export default function ReviewItem({ title, createdAt, postId }) {
               className="card-image"
               onClick={() => handleItemPost(postId)}
             >
-              <Card.Img src="https://1.bp.blogspot.com/-rAW7PxEXqww/XyMprSiTVgI/AAAAAAAACa8/FH8QpXwQahIiB53ALEBDIf_L1yMv2_yUACLcBGAsYHQ/s1600/ify5.jpg" />
+              <Card.Img src={image} />
             </Link>
           </Col>
           <Col sm={8} className="p-0">

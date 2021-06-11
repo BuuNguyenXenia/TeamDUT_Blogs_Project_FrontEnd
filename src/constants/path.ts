@@ -14,5 +14,7 @@ export const PATH = {
   RESET_PASSWORD: "/resetpassword/:resetLink",
   SEND_EMAIL: "/send-email",
   CHECK_MAIL_REGISTER: "/check-mail-register",
-  CHECK_MAIL_PASSWORD: "/check-mail-password"
+  CHECK_MAIL_PASSWORD: "/check-mail-password",
+  MANAGE_POST: "/manage-post",
+  EDIT_POST: "/edit"
 }

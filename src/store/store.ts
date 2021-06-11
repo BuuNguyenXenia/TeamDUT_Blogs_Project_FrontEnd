@@ -7,6 +7,7 @@ import featuredReducer from "src/components/Featured/Featured.slice"
 import reviewsReducer from "src/components/Reviews/Reviews.slice"
 import searchReducer from "src/pages/SearchPage/Search.slice"
 import itemPostReducer from "src/components/ViewAllPosts/Posts.slice"
+import myPostReducer from "src/pages/Admin/MyPost.slice"
 const rootReducer = {
   user: userReducer,
   popularPosts: popularPostsReducer,
@@ -15,7 +16,8 @@ const rootReducer = {
   featuredPosts: featuredReducer,
   reviewsPosts: reviewsReducer,
   dataSearch: searchReducer,
-  itemPost: itemPostReducer
+  itemPost: itemPostReducer,
+  myPost: myPostReducer
 }
 
 export const store = configureStore({

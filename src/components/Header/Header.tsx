@@ -56,14 +56,14 @@ const Header = () => {
   }, [scrollHeader])
 
   useEffect(() => {
-    console.log(isSuccess)
+    // console.log(isSuccess)
 
     setToken(accessToken)
     if (token) {
       dispatch(currentUser())
     }
   }, [token])
-  console.log(user)
+  // console.log(user)
 
   return (
     <HeaderBlogs className="header">
@@ -115,7 +115,7 @@ const Header = () => {
                         </Dropdown.Item>
                       </>
                     ) : (
-                      <Dropdown.Item as="p" className="link link-plain">
+                      <>
                         <Link to={PATH.USER_PROFILE}>
                           <Dropdown.Item as="span" className="link link-plain">
                             <i className="fa fa-user"></i>
@@ -128,14 +128,13 @@ const Header = () => {
                             Settings
                           </Dropdown.Item>
                         </Link>
-                        <Link
-                          to="/admin/manage-posts"
-                          className="link link-plain"
-                        >
-                          <i className="fas fa-tasks"></i>
-                          Posts Management
+                        <Link to={PATH.MANAGE_POST}>
+                          <Dropdown.Item as="span" className="link link-plain">
+                            <i className="fas fa-tasks"></i>
+                            Posts Management
+                          </Dropdown.Item>
                         </Link>
-                      </Dropdown.Item>
+                      </>
                     )}
                     <Dropdown.Divider />
                     <Dropdown.Item

@@ -5,6 +5,10 @@ const PostsApi = {
     const url = "/api/posts"
     return axiosClient.post(url, { params })
   },
+  getMyPosts: () => {
+    const url = "/mypost?page=1&per_page=10"
+    return axiosClient.get(url)
+  },
   getItemPosts: id => {
     const url = `/posts/${id}`
     return axiosClient.get(url)
@@ -40,6 +44,18 @@ const PostsApi = {
   createLike: _id => {
     const url = `/likes/${_id}`
     return axiosClient.post(url)
+  },
+  createPost: params => {
+    const url = "/posts"
+    return axiosClient.post(url, params)
+  },
+  deletePost: postId => {
+    const url = `/posts/${postId}`
+    return axiosClient.delete(url)
+  },
+  updatePost: (postId, params) => {
+    const url = `/posts/${postId}`
+    return axiosClient.put(url, params)
   }
 }
 
