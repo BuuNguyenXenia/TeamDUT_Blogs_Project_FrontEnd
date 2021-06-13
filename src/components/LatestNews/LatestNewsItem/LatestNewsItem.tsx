@@ -22,7 +22,7 @@ export default function LatestNewsItem({
   const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
-  const content = handleShowContent(body, 150)
+  const content = handleShowContent(body, 100)
   const creatDate = formatDate(createdAt)
 
   const handleItemPost = (postId: string) => {
@@ -36,7 +36,7 @@ export default function LatestNewsItem({
         <Row className="lastsNews-item">
           <Col xl={4} lg={4} md={4} sm={4} className="px-2">
             <Link
-              to={urlPost}
+              to={`${urlPost}/${postId}`}
               className="card-lastsNews-image"
               onClick={() => handleItemPost(postId)}
             >
@@ -46,14 +46,18 @@ export default function LatestNewsItem({
           <Col xl={8} lg={8} md={8} sm={8} className="p-0">
             <Card.Body className="card-lastsNews-body">
               <Card.Title className="card-lastsNews-title mb-1">
-                <Link to={urlPost} onClick={() => handleItemPost(postId)}>
+                <Link
+                  to={`${urlPost}/${postId}`}
+                  onClick={() => handleItemPost(postId)}
+                >
                   {title}
                 </Link>
               </Card.Title>
-              <Card.Text className="card-lastsNews-text">
-                {" "}
-                <div dangerouslySetInnerHTML={{ __html: content }}></div>
-              </Card.Text>
+              <Card.Text
+                as="div"
+                className="card-lastsNews-text"
+                dangerouslySetInnerHTML={{ __html: content }}
+              ></Card.Text>
               <span className="card-lastsNews-author">
                 by <span>Team DUT</span> • {creatDate}
               </span>

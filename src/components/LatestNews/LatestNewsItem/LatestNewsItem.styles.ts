@@ -49,6 +49,9 @@ export const LastsNewsItemPage = styled.div`
     font-size: 0.875em;
     color: var(--text-color);
     margin: 8px 0px;
+    p span {
+      color: var(--post-text-color) !important;
+    }
   }
   .card-lastsNews-author {
     font-size: 0.875em;

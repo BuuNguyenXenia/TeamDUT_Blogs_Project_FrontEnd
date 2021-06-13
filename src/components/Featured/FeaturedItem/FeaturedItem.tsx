@@ -27,7 +27,7 @@ const FeaturedItem = ({ title, createdAt, postId, image }) => {
     <Col xl={4} lg={4} md={12} sm={12} className="featured-items mb-4">
       <Item>
         <Link
-          to={urlPost}
+          to={`${urlPost}/${postId}`}
           className="featured-item"
           onClick={() => handleItemPost(postId)}
         >

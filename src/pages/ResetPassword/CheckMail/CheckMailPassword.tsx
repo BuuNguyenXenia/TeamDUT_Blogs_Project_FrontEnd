@@ -15,7 +15,9 @@ const CheckMailPassword = () => {
                   <img src={Logo} alt="Blogs Technology" />
                 </div>
                 <div className="mb-3">
-                  <h3>Forgot account password for Blogs</h3>
+                  <h3 className="card-title">
+                    Forgot account password for Blogs
+                  </h3>
                 </div>
                 <div>
                   <p className="card-subtitle mt-2">
@@ -30,7 +32,7 @@ const CheckMailPassword = () => {
                 >
                   <div className="el-alert__content">
                     <p className="el-alert__description">
-                      <div className="card-subtitle">
+                      <div className="subtitle">
                         <p className="my-3">
                           We have sent you an activation to the email address.
                           Please check your inbox to complete.

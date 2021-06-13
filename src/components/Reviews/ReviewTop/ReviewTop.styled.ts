@@ -1,8 +1,10 @@
 import styled from "styled-components"
 
 export const TopReview = styled.div`
+  .card {
+    height: 100%;
+  }
   .card-review-top {
-    height: 322.66px;
     border: 1px solid var(--border-color);
     background-color: var(--post-card-bg);
     border-radius: var(--radius);

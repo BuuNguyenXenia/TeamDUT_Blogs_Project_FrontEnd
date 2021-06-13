@@ -25,12 +25,18 @@ export default function ReviewTop({ title, createdAt, postId, image }) {
   return (
     <TopReview>
       <Card className="card-review-top">
-        <Link to={urlPost} onClick={() => handleItemPost(postId)}>
+        <Link
+          to={`${urlPost}/${postId}`}
+          onClick={() => handleItemPost(postId)}
+        >
           <Card.Img src={image} className="card-review-image" />
         </Link>
         <Card.Body className="card-review-body">
           <Card.Title className="card-review-title">
-            <Link to={urlPost} onClick={() => handleItemPost(postId)}>
+            <Link
+              to={`${urlPost}/${postId}`}
+              onClick={() => handleItemPost(postId)}
+            >
               {title}
             </Link>
           </Card.Title>

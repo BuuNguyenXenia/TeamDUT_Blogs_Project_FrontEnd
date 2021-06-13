@@ -52,7 +52,7 @@ export const Item = styled.div`
   }
   .entry-title {
     margin: 5px 0;
-    font-size: 20px;
+    font-size: 1.1em;
     font-weight: 700;
     z-index: 5;
   }

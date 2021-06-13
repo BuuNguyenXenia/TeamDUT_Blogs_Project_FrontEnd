@@ -8,8 +8,6 @@ export const getPopularPosts = createAsyncThunk(
       const response = await PostsApi.getPopularPosts()
       let data = await response.data
       if (response.status === 200) {
-        console.log(data)
-
         return data
       }
     } catch (err) {

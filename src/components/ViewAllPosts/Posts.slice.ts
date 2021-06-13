@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import toast from "react-hot-toast"
 import PostsApi from "src/apis/posts.api"
-import { MSG } from "src/constants/showMsg"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 
 export const itemPostThunk = createAsyncThunk(
@@ -11,8 +9,6 @@ export const itemPostThunk = createAsyncThunk(
       const response = await PostsApi.getItemPosts(_id)
       const data = await response.data
       if (response.status === 200) {
-        console.log(data)
-
         LocalStorageService.setItem("itemPost", data)
         return data
       } else {
@@ -51,61 +47,6 @@ export const createCommentPost = createAsyncThunk(
   }
 )
 
-interface newPost {
-  title: string
-  body: string
-  image: string
-}
-
-export const createNewPost = createAsyncThunk(
-  "post/newPost",
-  async (params: newPost, thunkAPI) => {
-    try {
-      const response = await PostsApi.createPost(params)
-      const data = await response.data
-
-      if (response.status === 200) {
-        toast.success(MSG.CREATE_NEW_POST_SUCCESS)
-        return data
-      }
-    } catch (err) {
-      toast.error(MSG.CREATE_NEW_POST_ERROR)
-    }
-  }
-)
-
-interface updatePosts {
-  postId: string
-  title: string
-  body: string
-  image: string
-}
-
-export const editPost = createAsyncThunk(
-  "post/edit",
-  async (params: updatePosts, thunkAPI) => {
-    try {
-      const postId = params.postId
-
-      const bodyPost = {
-        title: params.title,
-        body: params.body,
-        image: params.image
-      }
-      const response = await PostsApi.updatePost(postId, bodyPost)
-      const data = await response.data
-      console.log(data)
-
-      if (response.status === 200) {
-        toast.success(MSG.CREATE_NEW_POST_SUCCESS)
-        return data
-      }
-    } catch (err) {
-      toast.error(MSG.CREATE_NEW_POST_ERROR)
-    }
-  }
-)
-
 export const createLikePost = createAsyncThunk(
   "post/like",
   async (_id: string, thunkAPI) => {
@@ -113,7 +54,6 @@ export const createLikePost = createAsyncThunk(
       const response = await PostsApi.createLike(_id)
       const data = await response.data
       if (response.status === 200) {
-        LocalStorageService.setItem("itemPost", data)
         console.log(data)
 
         return data

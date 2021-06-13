@@ -8,7 +8,6 @@ import { dataMyPost } from "../MyPost.slice"
 import { useAppDispatch } from "src/store/hooks"
 import { Link } from "react-router-dom"
 import { PATH } from "src/constants/path"
-import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 import { itemPostThunk } from "src/components/ViewAllPosts/Posts.slice"
 
 const PostItem = ({ title, image, createdAt, body, postId }) => {
@@ -24,8 +23,7 @@ const PostItem = ({ title, image, createdAt, body, postId }) => {
     try {
       const response = await PostsApi.deletePost(id)
       if (response.status === 200) {
-        console.log(response)
-        dispatch(dataMyPost())
+        dispatch(dataMyPost(1))
         setShow(false)
       }
     } catch (err) {
@@ -35,23 +33,16 @@ const PostItem = ({ title, image, createdAt, body, postId }) => {
 
   const handleEdit = postId => {
     dispatch(itemPostThunk(postId))
-    // LocalStorageService.setItem("postId", postId)
   }
   return (
     <PostItemPage className="row m-0">
       <Col xs={12} className="p-0">
         <Card className="card-lastsNews-item">
           <Row className="lastsNews-item">
-            <Col
-              xl={3}
-              lg={3}
-              md={3}
-              sm={3}
-              className=" card-lastsNews-image px-2"
-            >
+            <Col lg={3} md={4} sm={5} className=" card-lastsNews-image px-2">
               <Card.Img src={image} />
             </Col>
-            <Col xl={9} lg={9} md={9} sm={9} className="p-0">
+            <Col lg={9} md={8} sm={7} className="p-0">
               <Card.Body className="card-lastsNews-body">
                 <Card.Title className="card-lastsNews-title mb-1">
                   {title}
@@ -67,12 +58,12 @@ const PostItem = ({ title, image, createdAt, body, postId }) => {
           </Row>
 
           <Dropdown className="ml-3">
-            <Dropdown.Toggle as="div" id="dropdown-p">
+            <Dropdown.Toggle as="div" id="dropdown-icon">
               <i className="fas fa-ellipsis-h"></i>
             </Dropdown.Toggle>
             <Dropdown.Menu className="dropdown-user_menu p-0">
               <Link
-                to={`${PATH.MANAGE_POST}${PATH.EDIT_POST}`}
+                to={`${PATH.MANAGE_POST}${PATH.EDIT_POST}/${postId}`}
                 onClick={() => handleEdit(postId)}
               >
                 <Dropdown.Item as="span" className="link link-plain py-2 px-3">

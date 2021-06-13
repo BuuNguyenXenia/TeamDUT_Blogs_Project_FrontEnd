@@ -2,15 +2,18 @@ import styled from "styled-components"
 
 export const ItemReview = styled.div`
   :nth-child(2) {
-    padding: 17px 0px;
+    margin: 16px 0px;
   }
   .card-review-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: var(--radius);
     border: 1px solid var(--border-color);
     background-color: var(--post-card-bg);
   }
   .card-item {
-    padding: 10px;
+    padding: 8px;
     margin: 0px;
   }
   .card-image {

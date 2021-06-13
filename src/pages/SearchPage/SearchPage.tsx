@@ -24,7 +24,7 @@ const SearchPage = () => {
           <LatestNewsItem {...el} key={"search-item-" + i} />
         ))
       ) : (
-        <p className="text-center mt-5">No results found</p>
+        <p className="found text-center my-5">No results found</p>
       )}
     </SearchStyle>
   )

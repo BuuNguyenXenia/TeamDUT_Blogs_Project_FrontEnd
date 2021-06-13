@@ -10,7 +10,6 @@ import CommentsItem from "./CommentsItem/CommentsItem"
 const CommentsPost = ({ postId, comments }) => {
   const [userComment, setUserComment] = useState<string>("")
   const dispatch = useAppDispatch()
-  console.log(comments)
 
   const onChangeComment = e => {
     setUserComment(e.target.value)
@@ -24,6 +23,7 @@ const CommentsPost = ({ postId, comments }) => {
     }
     if (accessToken) {
       dispatch(createCommentPost(params))
+      setUserComment("")
     } else {
       toast.error(MSG.NOT_LOGIN_ERROR)
     }
@@ -35,7 +35,7 @@ const CommentsPost = ({ postId, comments }) => {
           <CommentsItem {...el} key={"comment-item-" + i} />
         ))}
       <Form reply>
-        <Form.TextArea onChange={onChangeComment} />
+        <Form.TextArea onChange={onChangeComment} value={userComment} />
         <Button
           type="submit"
           content="Add Comment"

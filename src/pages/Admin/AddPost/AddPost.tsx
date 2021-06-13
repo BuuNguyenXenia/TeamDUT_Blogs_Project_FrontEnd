@@ -2,11 +2,12 @@ import React, { useState } from "react"
 import "react-quill/dist/quill.snow.css"
 import { AddPostPage } from "./AddPost.styles"
 import { Button, Col, Form, Row } from "react-bootstrap"
-import Editor from "../Editor/Editor"
 import userApi from "src/apis/user.api"
-import { useAppDispatch } from "src/store/hooks"
-import { createNewPost } from "src/components/ViewAllPosts/Posts.slice"
-import { Toaster } from "react-hot-toast"
+import { useAppDispatch, useAppSelector } from "src/store/hooks"
+import { createNewPost, dataMyPost, myPostSelector } from "../MyPost.slice"
+import ReactQuill from "react-quill"
+import "react-quill/dist/quill.snow.css"
+import Spinner from "react-bootstrap/Spinner"
 
 export const AddPost = () => {
   const dispatch = useAppDispatch()
@@ -14,12 +15,19 @@ export const AddPost = () => {
   const [image, setImage] = useState<string>("")
   const [content, setContent] = useState("")
 
-  const callbackContent = childData => {
-    setContent(childData)
+  const { isFetching } = useAppSelector(myPostSelector)
+
+  const handleChangeTitle = e => {
+    setTitle(e.target.value)
   }
 
-  const onChangeTitle = e => {
-    setTitle(e.target.value)
+  const handleChangeContent = value => {
+    setContent(value)
+  }
+
+  const HandleClear = () => {
+    setTitle("")
+    setContent("")
   }
 
   const handleAddPost = (title: string, image: string, content: string) => {
@@ -31,6 +39,7 @@ export const AddPost = () => {
     console.log(params)
 
     dispatch(createNewPost(params))
+    dispatch(dataMyPost(1))
   }
 
   const onChangeImage = async e => {
@@ -56,17 +65,16 @@ export const AddPost = () => {
 
   return (
     <AddPostPage>
-      <Toaster position="top-center" reverseOrder={true} />
       <Form>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={8}>
+            <Col xs={11} md={8}>
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter Title"
                 value={title}
-                onChange={onChangeTitle}
+                onChange={handleChangeTitle}
               />
             </Col>
           </Row>
@@ -76,28 +84,58 @@ export const AddPost = () => {
             <Col xs={12}>
               <Form.File
                 type="file"
+                id="image"
                 name="image-upload"
                 label="Image"
                 onChange={onChangeImage}
+                required
               />
             </Col>
           </Row>
         </Form.Group>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={10}>
+            <Col xs={11} md={10}>
               <Form.Label>Content</Form.Label>
-              <Editor parentCallback={callbackContent} />
+              <ReactQuill
+                theme="snow"
+                value={content}
+                onChange={handleChangeContent}
+              />
             </Col>
           </Row>
         </Form.Group>
-        <Button
-          variant="primary"
-          type="button"
-          onClick={() => handleAddPost(title, image, content)}
-        >
-          Add
-        </Button>
+        <Form.Group className="mt-3">
+          <Row>
+            <Col>
+              <Button
+                variant="secondary"
+                type="button"
+                className="mr-3"
+                onClick={() => HandleClear()}
+              >
+                Clear
+              </Button>
+              <Button
+                variant="primary"
+                type="button"
+                onClick={() => handleAddPost(title, image, content)}
+              >
+                {isFetching && (
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="false"
+                    className="mr-1"
+                  />
+                )}
+                Add
+              </Button>
+            </Col>
+          </Row>
+        </Form.Group>
       </Form>
     </AddPostPage>
   )

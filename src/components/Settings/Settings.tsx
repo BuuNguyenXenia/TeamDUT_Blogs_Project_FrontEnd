@@ -67,52 +67,55 @@ const Settings = () => {
       </Row>
       <Form onSubmit={handleSubmit(() => HandlePassword(user, state))}>
         <Row>
-          <Col xs={3}>
+          <Col xs={4} md={3}>
             <Form.Label>Password:</Form.Label>
           </Col>
-          <Col xs={7}>
+          <Col xs={7} md={7}>
             <Form.Control
               type="password"
               value={state.password}
               {...register("password")}
               name="password"
               onChange={handleChange}
+              placeholder="password"
             />
             <p className="mt-2 error">{errors.password?.message}</p>
           </Col>
         </Row>
         <Row className="mt-4">
-          <Col xs={3}>
+          <Col xs={4} md={3}>
             <Form.Label>New Password: </Form.Label>
           </Col>
-          <Col xs={7}>
+          <Col xs={7} md={7}>
             <Form.Control
               type="password"
               value={state.newPassword}
               {...register("newPassword")}
               name="newPassword"
               onChange={handleChange}
+              placeholder="new password"
             />
             <p className="mt-2 error">{errors.newPassword?.message}</p>
           </Col>
         </Row>
         <Row className="mt-4">
-          <Col xs={3}>
+          <Col xs={4} md={3}>
             <Form.Label>Confirm Password: </Form.Label>
           </Col>
-          <Col xs={7}>
+          <Col xs={7} md={7}>
             <Form.Control
               type="password"
               value={state.confirmPassword}
               {...register("confirmPassword")}
               name="confirmPassword"
               onChange={handleChange}
+              placeholder="confirm password"
             />
             <p className="mt-2 error">{errors.confirmPassword?.message}</p>
           </Col>
         </Row>
         <Row>
-          <Col xs={2}>
+          <Col xs={4} md={3} className="mb-4">
             <Button variant="primary" className="mt-4" type="submit" block>
               Update
             </Button>

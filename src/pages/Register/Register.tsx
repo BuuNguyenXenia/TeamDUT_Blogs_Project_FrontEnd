@@ -9,13 +9,13 @@ import { registerUser, userSelector, clearState } from "../User/User.slice"
 import { Link, useHistory } from "react-router-dom"
 import toast, { Toaster } from "react-hot-toast"
 import { PATH } from "src/constants/path"
+import Spinner from "react-bootstrap/Spinner"
 
 const Register = () => {
   const dispatch = useAppDispatch()
   const history = useHistory()
-  const { isSuccess, isError, errorMessage } = useAppSelector(userSelector)
-
-  console.log(isSuccess, isError, errorMessage)
+  const { isSuccess, isError, errorMessage, isFetching } =
+    useAppSelector(userSelector)
 
   const onSubmit = data => {
     dispatch(registerUser(data))
@@ -29,8 +29,6 @@ const Register = () => {
 
   useEffect(() => {
     if (isError) {
-      console.log(errorMessage)
-
       toast.error(errorMessage)
       dispatch(clearState())
     }
@@ -191,6 +189,16 @@ const Register = () => {
                             type="submit"
                             className="btn btn-primary btn-block mb-2"
                           >
+                            {isFetching && (
+                              <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="false"
+                                className="mr-1"
+                              />
+                            )}
                             Sign up
                           </Button>
                         </Col>

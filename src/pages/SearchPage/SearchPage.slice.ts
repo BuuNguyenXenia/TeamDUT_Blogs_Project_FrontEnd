@@ -21,4 +21,7 @@ export const SearchStyle = styled.div`
       margin: 1px 0 0 3px;
     }
   }
+  .found {
+    color: var(--post-title-color);
+  }
 `

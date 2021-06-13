@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import PostsApi from "src/apis/posts.api"
 
 export const getReviewsPosts = createAsyncThunk(
-  "lastsNews/posts",
+  "reviews/posts",
   async thunkAPI => {
     try {
       const response = await PostsApi.getReviews()
@@ -16,7 +16,7 @@ export const getReviewsPosts = createAsyncThunk(
 )
 
 const reviewsSlice = createSlice({
-  name: "latestNewsPosts",
+  name: "reviewPosts",
   initialState: {
     current: {},
     isSuccess: false

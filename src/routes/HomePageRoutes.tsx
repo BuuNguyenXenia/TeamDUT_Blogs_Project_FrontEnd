@@ -45,7 +45,11 @@ export default function HomePageRoutes() {
       <LayoutRoute path={PATH.SEARCH_POST} component={<SearchPage />} />
       <PrivateRoute path={PATH.USER_PROFILE} component={<Profile />} />
       <PrivateRoute path={PATH.USER_SETTINGS} component={<Settings />} />
-      <LayoutRoute path={urlPost} component={<ViewPostsItem />} />
+      <LayoutRoute
+        path={`${urlPost}/:postId`}
+        component={<ViewPostsItem />}
+        exact
+      />
       <Route exact path={PATH.NOT_FOUND}>
         <NotFoundPage />
       </Route>

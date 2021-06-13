@@ -28,7 +28,7 @@ export default function PopularPostsItem({ title, createdAt, postId, image }) {
         <Row>
           <Col xs={4} className="p-0">
             <Link
-              to={urlPost}
+              to={`${urlPost}/${postId}`}
               className="posts-item-image wrapper-image"
               onClick={() => handleItemPost(postId)}
             >
@@ -37,7 +37,10 @@ export default function PopularPostsItem({ title, createdAt, postId, image }) {
           </Col>
           <Col xs={8} className="posts-item-body">
             <h5 className="posts-item-title wrapper-title">
-              <Link to={urlPost} onClick={() => handleItemPost(postId)}>
+              <Link
+                to={`${urlPost}/${postId}`}
+                onClick={() => handleItemPost(postId)}
+              >
                 {title}
               </Link>
             </h5>

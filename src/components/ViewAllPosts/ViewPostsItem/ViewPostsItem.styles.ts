@@ -102,6 +102,13 @@ export const ViewItem = styled.div`
       color: var(--post-text-color);
       line-height: 1.6em;
       margin-top: 20px;
+
+      p span {
+        color: var(--post-text-color) !important;
+      }
+      em {
+        color: rgb(255 77 77) !important;
+      }
     }
   }
   .comments-posts {
