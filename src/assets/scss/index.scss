@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap");
 @import "semantic-ui-css/semantic.min.css";
 @import 'react-quill/dist/quill.snow.css';
+
 :root {
   --date-color: rgba(0, 0, 0, 0.4);
   --post-text-color: #3c4043;
@@ -74,6 +75,7 @@ img {
       }
     }
   }
+
 }
 
 @media (max-width: 992px) {
@@ -100,6 +102,7 @@ img {
       align-items: center;
     }
   }
+
 }
 
 @media (max-width: 768px) {
@@ -111,6 +114,30 @@ img {
 @media (max-width: 576px) {
   body {
     font-size: 14px;
+  }
+
+
+
+
+  //profile
+  img.avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .change-avatar {
+    position: absolute;
+    right: 13px;
+    bottom: 0px;
+    background-color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .profile-body {
+    font-size: 1em;
   }
 }
 
@@ -166,4 +193,46 @@ img {
   background-color: black;
   text-align: center;
   cursor: pointer;
+}
+
+.modal-content {
+  background-color: var(--post-card-bg);
+}
+
+div#example-modal-sizes-title-lg {
+  color: var(--post-title-color);
+}
+
+.close {
+  span {
+    color: var(--post-title-color);
+  }
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(155, 155, 155, 0.15);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(155, 155, 155, 0.15);
+}
+
+.modal-title {
+  color: var(--post-title-color);
+}
+
+.modal-body {
+  color: var(--post-title-color);
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: var(--widget-title-color);
+  background-color: var(--post-card-bg);
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+a.page-link {
+  border: 1px solid var(--border-color);
+  background-color: var(--post-card-bg);
 }

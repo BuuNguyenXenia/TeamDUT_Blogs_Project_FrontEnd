@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap"
 import Switch from "react-bootstrap/esm/Switch"
+import { Toaster } from "react-hot-toast"
 import { Route } from "react-router"
 import { PATH } from "src/constants/path"
 import { useAppDispatch, useAppSelector } from "src/store/hooks"
@@ -15,37 +16,44 @@ const ManagePost = () => {
   const dispatch = useAppDispatch()
   const user = useAppSelector(userSelector)
   const dataPost = useAppSelector(myPostSelector)
+  console.log(dataPost)
+
   useEffect(() => {
     if (user.role === "admin") {
-      dispatch(dataMyPost())
+      dispatch(dataMyPost(1))
     }
   }, [user.role])
 
   return (
     dataPost && (
-      <ManagePostPage>
-        <Container>
-          <Row>
-            <Col>
-              <Tabs defaultActiveKey="posts" id="uncontrolled-tab">
-                <Tab eventKey="posts" title="Posts">
-                  <Switch>
-                    <Route path={PATH.MANAGE_POST} exact>
-                      <PostList {...dataPost} />
-                    </Route>
-                    <Route path={`${PATH.MANAGE_POST}${PATH.EDIT_POST}`}>
-                      <EditPost />
-                    </Route>
-                  </Switch>
-                </Tab>
-                <Tab eventKey="add post" title="Add Post">
-                  <AddPost />
-                </Tab>
-              </Tabs>
-            </Col>
-          </Row>
-        </Container>
-      </ManagePostPage>
+      <>
+        <Toaster position="top-center" reverseOrder={false} />
+        <ManagePostPage>
+          <Container>
+            <Row>
+              <Col>
+                <Tabs defaultActiveKey="posts" id="uncontrolled-tab">
+                  <Tab eventKey="posts" title="Posts">
+                    <Switch>
+                      <Route path={PATH.MANAGE_POST} exact>
+                        <PostList {...dataPost} />
+                      </Route>
+                      <Route
+                        path={`${PATH.MANAGE_POST}${PATH.EDIT_POST}/:postId`}
+                      >
+                        <EditPost />
+                      </Route>
+                    </Switch>
+                  </Tab>
+                  <Tab eventKey="add post" title="Add Post">
+                    <AddPost />
+                  </Tab>
+                </Tabs>
+              </Col>
+            </Row>
+          </Container>
+        </ManagePostPage>
+      </>
     )
   )
 }

@@ -26,7 +26,7 @@ const LatestDealsItem = ({ title, createdAt, postId, image }) => {
     <Col xs={6} className="mb-3 p-0">
       <DealsItem>
         <Link
-          to={urlPost}
+          to={`${urlPost}/${postId}`}
           className="deals-item-image wrapper-image"
           onClick={() => handleItemPost(postId)}
         >
@@ -34,7 +34,10 @@ const LatestDealsItem = ({ title, createdAt, postId, image }) => {
         </Link>
         <div className="deals-item-body">
           <h5 className="deals-item-title wrapper-title">
-            <Link to={urlPost} onClick={() => handleItemPost(postId)}>
+            <Link
+              to={`${urlPost}/${postId}`}
+              onClick={() => handleItemPost(postId)}
+            >
               {title}
             </Link>
           </h5>

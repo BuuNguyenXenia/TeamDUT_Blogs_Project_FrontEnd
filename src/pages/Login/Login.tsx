@@ -9,11 +9,13 @@ import { useAppSelector, useAppDispatch } from "../../store/hooks"
 import { clearState, loginUser, userSelector } from "../User/User.slice"
 import toast, { Toaster } from "react-hot-toast"
 import { PATH } from "src/constants/path"
+import Spinner from "react-bootstrap/Spinner"
 
 const Login = () => {
   const dispatch = useAppDispatch()
   const history = useHistory()
-  const { isSuccess, isError, errorMessage } = useAppSelector(userSelector)
+  const { isSuccess, isError, errorMessage, isFetching } =
+    useAppSelector(userSelector)
 
   const onSubmit = data => {
     dispatch(loginUser(data))
@@ -68,7 +70,7 @@ const Login = () => {
                       <img src={Logo} alt="Blogs Technology" />
                     </div>
                     <div className="text-center mb-3">
-                      <h5> Login to Blogs</h5>
+                      <h5 className="card-title"> Login to Blogs</h5>
                     </div>
                     <Form onSubmit={handleSubmit}>
                       <Form.Row>
@@ -131,6 +133,16 @@ const Login = () => {
                         type="submit"
                         className="btn btn-primary btn-block mb-2"
                       >
+                        {isFetching && (
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="false"
+                            className="mr-1"
+                          />
+                        )}
                         Sign in
                       </Button>
                       <div className="d-flex justify-content-between">

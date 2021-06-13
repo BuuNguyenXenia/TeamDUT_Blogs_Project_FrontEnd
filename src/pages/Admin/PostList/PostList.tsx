@@ -1,7 +1,7 @@
-import { Button, Col, Row } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 import { LatestNewsPage } from "src/components/LatestNews/LatestNews.styles"
-
 import PostItem from "../PostItem/PostItem"
+import PaginationAdmin from "../Pagination/PaginationAdmin"
 
 const PostList = props => {
   const { dataPost, isSuccess } = props
@@ -14,9 +14,9 @@ const PostList = props => {
               <PostItem {...el} key={"myPost" + i} />
             ))
           : null}
-        <Row className="mt-3 mb-3">
-          <Col sm={{ span: 4, offset: 4 }} xs={{ span: 6, offset: 3 }}>
-            <Button className="button-load-more btn-block">Load more</Button>
+        <Row>
+          <Col xs={12}>
+            <PaginationAdmin lastPage={dataPost.last_page} />
           </Col>
         </Row>
       </div>

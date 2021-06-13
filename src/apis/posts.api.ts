@@ -5,8 +5,8 @@ const PostsApi = {
     const url = "/api/posts"
     return axiosClient.post(url, { params })
   },
-  getMyPosts: () => {
-    const url = "/mypost?page=1&per_page=10"
+  getMyPosts: page => {
+    const url = `/mypost?page=${page}&per_page=6`
     return axiosClient.get(url)
   },
   getItemPosts: id => {
@@ -21,8 +21,8 @@ const PostsApi = {
     const url = "/posts?per_page=4&sort_by=-createdAt"
     return axiosClient.get(url)
   },
-  getLatestNews: () => {
-    const url = "/posts?page=1"
+  getLatestNews: page => {
+    const url = `/posts?page=${page}&per_page=6`
     return axiosClient.get(url)
   },
   getFeatured: () => {
@@ -30,7 +30,7 @@ const PostsApi = {
     return axiosClient.get(url)
   },
   getReviews: () => {
-    const url = "/posts?per_page=4&sort_by=-createdAt"
+    const url = "/posts?per_page=5&sort_by=-createdAt"
     return axiosClient.get(url)
   },
   searchPosts: value => {

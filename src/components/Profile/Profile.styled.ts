@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const ProfileStyle = styled.div`
+  margin-bottom: 50px;
   .profile-title {
     font-size: 1.1em;
     font-weight: 500;
@@ -63,6 +64,32 @@ export const ProfileStyle = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+  }
+  .form-label {
+    color: var(--meta-color);
+  }
+
+  @media (max-width: 576px) {
+    //profile
+    img.avatar {
+      width: 60px;
+      height: 60px;
+    }
+
+    .change-avatar {
+      position: absolute;
+      right: 13px;
+      bottom: 0px;
+      background-color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .profile-body {
+      font-size: 1em;
     }
   }
 `

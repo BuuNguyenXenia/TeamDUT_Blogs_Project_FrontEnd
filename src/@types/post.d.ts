@@ -15,3 +15,7 @@ interface ItemPost {
 //   body: string,
 //   image: string
 // }
+
+interface RouteParams {
+  postId: string
+}

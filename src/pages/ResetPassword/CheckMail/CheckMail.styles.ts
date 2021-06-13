@@ -10,16 +10,20 @@ export const CheckMailPage = styled.div`
   .el-card {
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     border-radius: 4px;
-    border: 1px solid #ebeef5;
-    background-color: #fff;
+    border-top: 1px solid rgba(155, 155, 155, 0.15);
+    background-color: var(--post-card-bg);
     overflow: hidden;
     color: #303133;
-    transition: 0.3s;
+
     &__body {
       padding: 20px;
     }
   }
+  .card-title {
+    color: var(--post-title-color);
+  }
   .card-subtitle {
+    color: var(--text-color);
     font-size: 0.875em;
   }
   .el-alert--success.is-light {

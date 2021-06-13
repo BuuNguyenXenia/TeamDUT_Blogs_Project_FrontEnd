@@ -19,4 +19,10 @@ export const AddPostPage = styled.div`
     color: var(--widget-title-color);
     font-weight: 600;
   }
+  .form-control-file {
+    color: var(--widget-title-color);
+  }
+  .quill {
+    background-color: white;
+  }
 `

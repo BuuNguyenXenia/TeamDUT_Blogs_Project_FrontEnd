@@ -61,7 +61,7 @@ const SendEmail = () => {
                       <img src={Logo} alt="Blogs Technology" />
                     </div>
                     <div className="mb-3">
-                      <h5>Enter your email</h5>
+                      <h5 className="card-title">Enter your email</h5>
                     </div>
                     <Form onSubmit={handleSubmit}>
                       <Form.Row>

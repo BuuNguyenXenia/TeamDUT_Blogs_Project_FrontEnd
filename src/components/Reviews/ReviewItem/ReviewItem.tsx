@@ -31,7 +31,7 @@ export default function ReviewItem({ title, createdAt, postId, image }) {
         <Row className="card-item">
           <Col sm={4} className="p-0">
             <Link
-              to={urlPost}
+              to={`${urlPost}/${postId}`}
               className="card-image"
               onClick={() => handleItemPost(postId)}
             >
@@ -41,7 +41,10 @@ export default function ReviewItem({ title, createdAt, postId, image }) {
           <Col sm={8} className="p-0">
             <Card.Body className="card-review-body">
               <Card.Title className="card-review-title mb-1">
-                <Link to={urlPost} onClick={() => handleItemPost(postId)}>
+                <Link
+                  to={`${urlPost}/${postId}`}
+                  onClick={() => handleItemPost(postId)}
+                >
                   {content}
                 </Link>
               </Card.Title>

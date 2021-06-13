@@ -150,15 +150,18 @@ const userSlice = createSlice({
     // login user
     [loginUser.fulfilled.type]: (state, { payload }) => {
       state.isSuccess = true
+      state.isFetching = false
       return state
     },
     [loginUser.rejected.type]: (state, { payload }) => {
       state.isError = true
-      console.log(payload)
+      state.isFetching = false
 
       state.errorMessage = payload
     },
-    [loginUser.pending.type]: state => {},
+    [loginUser.pending.type]: state => {
+      state.isFetching = true
+    },
     [logoutUser.fulfilled.type]: (state, { payload }) => {
       state.name = ""
       state.email = ""
@@ -170,14 +173,18 @@ const userSlice = createSlice({
     //register user
     [registerUser.fulfilled.type]: (state, { payload }) => {
       state.isSuccess = true
+      state.isFetching = false
       return state
     },
     [registerUser.rejected.type]: (state, { payload }) => {
       state.isError = true
       state.isSuccess = false
+      state.isFetching = false
       state.errorMessage = payload
     },
-
+    [registerUser.pending.type]: state => {
+      state.isFetching = true
+    },
     //get current user
     [currentUser.fulfilled.type]: (state, { payload }) => {
       state.name = payload.username
@@ -201,11 +208,16 @@ const userSlice = createSlice({
 
     [updateAvatarUser.fulfilled.type]: (state, { payload }) => {
       state.avatar = payload.avatar
+      state.isFetching = false
       return state
     },
 
     [updateAvatarUser.rejected.type]: (state, { payload }) => {
       state.errorMessage = payload
+      state.isFetching = false
+    },
+    [updateAvatarUser.pending.type]: state => {
+      state.isFetching = true
     }
   }
 })

@@ -15,7 +15,7 @@ const CheckMailRegister = () => {
                   <img src={Logo} alt="Blogs Technology" />
                 </div>
                 <div className="mb-3">
-                  <h3>Register account for Blogs</h3>
+                  <h3 className="card-title">Register account for Blogs</h3>
                 </div>
                 <div>
                   <p className="card-subtitle mt-2">
@@ -31,7 +31,7 @@ const CheckMailRegister = () => {
                 >
                   <div className="el-alert__content">
                     <p className="el-alert__description">
-                      <div className="card-subtitle">
+                      <div className="subtitle">
                         <p className="my-3">
                           Welcome to <strong>Blogs</strong>, your account have
                           been <strong>registered successfully</strong>. We have

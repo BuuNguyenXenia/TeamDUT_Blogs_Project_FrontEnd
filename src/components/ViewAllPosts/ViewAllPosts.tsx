@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Button, Col, Row } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "src/store/hooks"
 import {
@@ -8,14 +8,15 @@ import {
 } from "../LatestNews/LatestNews.slice"
 import { LatestNewsPage } from "../LatestNews/LatestNews.styles"
 import LatestNewsItem from "../LatestNews/LatestNewsItem/LatestNewsItem"
+import PaginationPost from "../Pagination/PaginationPost"
 
 const ViewAllPosts = () => {
   const dispatch = useAppDispatch()
   const latestNewsPosts = useAppSelector(latestNewsPostsSelector)
-  const { current, isSuccess } = latestNewsPosts
+  const { current, isSuccess, lastPage } = latestNewsPosts
 
   useEffect(() => {
-    dispatch(getLatestNews())
+    dispatch(getLatestNews(1))
   }, [])
 
   return (
@@ -37,8 +38,8 @@ const ViewAllPosts = () => {
           </Col>
         </Row>
         <Row className="mt-3 mb-3">
-          <Col sm={{ span: 4, offset: 4 }} xs={{ span: 6, offset: 3 }}>
-            <Button className="button-load-more btn-block">Load more</Button>
+          <Col xs={12}>
+            <PaginationPost lastPage={lastPage} />
           </Col>
         </Row>
       </div>

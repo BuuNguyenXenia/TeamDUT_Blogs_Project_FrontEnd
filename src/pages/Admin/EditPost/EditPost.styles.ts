@@ -19,9 +19,14 @@ export const EditPostPage = styled.div`
     color: var(--widget-title-color);
     font-weight: 600;
   }
- 
+
   .image-post {
     width: 300px;
   }
-
+  .quill {
+    background-color: white;
+  }
+  .form-control-file {
+    color: var(--widget-title-color);
+  }
 `

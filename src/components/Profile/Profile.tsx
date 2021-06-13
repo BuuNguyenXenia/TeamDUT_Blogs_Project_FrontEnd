@@ -14,11 +14,12 @@ import * as Yup from "yup"
 import userApi from "src/apis/user.api"
 import { MSG } from "src/constants/showMsg"
 import avatarDefault from "src/assets/images/avatar.png"
+import Spinner from "react-bootstrap/Spinner"
 
 const Profile = () => {
   const user = useAppSelector(userSelector)
   const dispatch = useAppDispatch()
-  const { name, email, avatar } = user
+  const { name, email, avatar, isFetching } = user
 
   const [userName, setUserName] = useState<string>(name)
   const [checkEditUSer, setCheckEditUSer] = useState<boolean>(false)
@@ -37,7 +38,7 @@ const Profile = () => {
       urlUser: name
     }
     dispatch(updateUserName(params))
-    toast.success("Finish")
+    toast.success("Change User name successfully")
   }
 
   const schema = Yup.object().shape({
@@ -84,29 +85,35 @@ const Profile = () => {
   const handleShow = () => setShow(true)
 
   const imageUploadToImgur = async (image: any) => {
-    try {
-      const formData = new FormData()
+    if (image !== null) {
+      try {
+        const formData = new FormData()
 
-      formData.append("file", image)
-      formData.append("tags", `codeinfuse, medium, gist`)
-      formData.append("upload_preset", "rhy123")
-      formData.append("api_key", "954397545867351")
+        formData.append("file", image)
+        formData.append("tags", `codeinfuse, medium, gist`)
+        formData.append("upload_preset", "rhy123")
+        formData.append("api_key", "954397545867351")
 
-      const response = await userApi.uploadAvatar(formData)
-      const data = await response.data
+        const response = await userApi.uploadAvatar(formData)
+        const data = await response.data
 
-      if (response.status === 200) {
-        const params = {
-          name: name,
-          avatar: data.secure_url
+        if (response.status === 200) {
+          const params = {
+            name: name,
+            avatar: data.secure_url
+          }
+          dispatch(updateAvatarUser(params))
+          toast.success(MSG.UPDATE_AVATAR_SUCCESS)
+          setProfileImg(avatarDefault)
+          if (!isFetching) {
+            setShow(false)
+          }
         }
-        dispatch(updateAvatarUser(params))
-        toast.success(MSG.UPDATE_AVATAR_SUCCESS)
-        setProfileImg(avatarDefault)
-        setShow(false)
+      } catch (err) {
+        toast.error(err.response.data)
       }
-    } catch (err) {
-      toast.error(err.response.data)
+    } else {
+      toast.error("Please choose picture")
     }
   }
 
@@ -120,17 +127,17 @@ const Profile = () => {
         </Col>
       </Row>
       <Row className="profile-user">
-        <Col md={2} sm={12} className="profile-avatar">
-          <img src={avatar} alt="avatar" />
+        <Col md={2} xs={3} className="profile-avatar">
+          <img src={avatar} alt="avatar" className="avatar" />
           <div className="change-avatar" onClick={handleShow}>
             <i className="fas fa-camera-retro"></i>
           </div>
         </Col>
-        <Col md={5} sm={12} className="profile-body">
+        <Col md={7} xs={6} className="profile-body ">
           <p className="profile-gmail">{email}</p>
           <p className="profile-name">@{name}</p>
         </Col>
-        <Col md={5} sm={12}>
+        <Col md={3} xs={2} className="p-0">
           <Button
             variant="outline-primary mt-3"
             onClick={() => HandleShowUser()}
@@ -182,15 +189,22 @@ const Profile = () => {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => imageUploadToImgur(image)}>Save</Button>
+          <Button onClick={() => imageUploadToImgur(image)}>
+            {isFetching && (
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="false"
+                className="mr-1"
+              />
+            )}
+            Save
+          </Button>
         </Modal.Footer>
       </Modal>
       <Row className={checkEditUSer ? "m-0 mt-5 active" : "m-0 form-user"}>
-        <Row>
-          <Col xs={2}>
-            <img src="" alt="" />
-          </Col>
-        </Row>
         <Form onSubmit={handleSubmit(() => HandleUserName(name, userName))}>
           <Row>
             <Col xs={12}>
@@ -198,18 +212,18 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col xs={2}>
+            <Col xs={3}>
               <Form.Label>Email:</Form.Label>
             </Col>
-            <Col xs={7}>
+            <Col xs={9} md={7}>
               <Form.Control type="email" value={email} disabled />
             </Col>
           </Row>
           <Row className="mt-4">
-            <Col xs={2}>
+            <Col xs={3}>
               <Form.Label>User Name:</Form.Label>
             </Col>
-            <Col xs={7}>
+            <Col xs={9} md={7}>
               <Form.Control
                 type="text"
                 value={userName}
@@ -220,8 +234,13 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col xs={2}>
-              <Button variant="primary" className="mt-4" type="submit" block>
+            <Col xs={4} md={3}>
+              <Button
+                variant="primary"
+                className="mt-3 mb-4"
+                type="submit"
+                block
+              >
                 Update
               </Button>
             </Col>

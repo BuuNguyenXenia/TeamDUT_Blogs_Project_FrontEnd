@@ -16,6 +16,9 @@ export const SettingsPage = styled.div`
       margin: 0 4px;
     }
   }
+  .form-label {
+    color: var(--meta-color);
+  }
   .error {
     color: var(--red);
   }

@@ -12,6 +12,7 @@ export default function Reviews() {
   const dispatch = useAppDispatch()
   const reviewsPosts = useAppSelector(reviewsPostsSelector)
   const { current, isSuccess } = reviewsPosts
+  console.log(reviewsPosts)
 
   useEffect(() => {
     dispatch(getReviewsPosts())
@@ -38,7 +39,7 @@ export default function Reviews() {
           <Col xl={6} lg={6} md={12} sm={12} className="mt-3">
             {isSuccess
               ? current
-                  .slice(1, 4)
+                  .slice(2, 5)
                   .map((el, i) => (
                     <ReviewItem {...el} key={"reviews-item" + i} />
                   ))
