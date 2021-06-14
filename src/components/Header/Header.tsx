@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { HeaderBlogs, ThemeSwitch } from "./Header.styles"
 import logo from "../../assets/images/logo.png"
+import mark from "../../assets/images/exclamation-mark.png"
 import Search from "../Search/Search"
 import { Container, Dropdown } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
@@ -13,8 +14,12 @@ import {
 import { PATH } from "src/constants/path"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 import { clearState } from "../ViewAllPosts/Posts.slice"
+import Pusher from "pusher-js"
+import sorry from "../../assets/sounds/message-with-intro.mp3"
+import useSound from "use-sound"
 
 const Header = () => {
+  const [play] = useSound(sorry)
   const [toogle, setToggle] = useState<boolean>(false)
   const [scrollHeader, setScrollHeader] = useState<string>("notShadow")
   const history = useHistory()
@@ -22,7 +27,7 @@ const Header = () => {
   let accessToken: any = LocalStorageService.getItem<string>("accessToken")
 
   const [token, setToken] = useState<string>(accessToken)
-
+  const [hasNoti, setHasNoti] = useState<boolean>(false)
   const user = useAppSelector(userSelector)
   const { email, name, isSuccess, role, avatar } = user
 
@@ -62,6 +67,19 @@ const Header = () => {
       dispatch(currentUser())
     }
   }, [token])
+  useEffect(() => {
+    console.log("email", email)
+    var pusher = new Pusher("5ee23d2be54abf269991", {
+      cluster: "ap1"
+    })
+
+    var channel = pusher.subscribe(email)
+    channel.bind("my-event", function (data: any) {
+      console.log(JSON.stringify(data))
+      setHasNoti(true)
+      play()
+    })
+  }, [email])
 
   return (
     <HeaderBlogs className="header">
@@ -83,6 +101,18 @@ const Header = () => {
                 <Dropdown className="ml-3">
                   <Dropdown.Toggle as="div" id="dropdown-user">
                     <img src={avatar} alt="user avatar" />
+                    {hasNoti && (
+                      <img
+                        src={mark}
+                        style={{
+                          width: "25px",
+                          height: "25px",
+                          objectFit: "contain",
+                          position: "absolute",
+                          right: "-5px"
+                        }}
+                      />
+                    )}
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="dropdown-user_menu">
                     <div className="user">
@@ -124,6 +154,28 @@ const Header = () => {
                           <Dropdown.Item as="span" className="link link-plain">
                             <i className="fas fa-cog"></i>
                             Settings
+                          </Dropdown.Item>
+                        </Link>
+                        <Link
+                          to={PATH.USER_PROFILE}
+                          onClick={() => {
+                            setHasNoti(false)
+                          }}
+                        >
+                          <Dropdown.Item as="span" className="link link-plain">
+                            <i className="fas fa-bell"></i>
+                            {hasNoti && (
+                              <img
+                                src={mark}
+                                style={{
+                                  position: "absolute",
+                                  height: "15px",
+                                  width: "15px",
+                                  left: "20px"
+                                }}
+                              />
+                            )}
+                            Notifications
                           </Dropdown.Item>
                         </Link>
                         <Link to={PATH.MANAGE_POST}>
