@@ -14,9 +14,7 @@ import HomePage from "src/pages/HomePage/HomePage"
 import { LayoutRoute } from "./LayoutRoute"
 import NotFoundPage from "src/pages/NotFoundPage/NotFoundPage"
 import PrivateRoute from "./NavigationRoute/PrivateRoute"
-import Header from "src/components/Header/Header"
-import ScrollToTop from "src/components/ScrollToTop/ScrollToTop"
-import Footer from "src/components/Footer/Footer"
+import PrivateAdminRoute from "./NavigationRoute/PrivateAdminRoute"
 import ManagePost from "src/pages/Admin/ManagePost"
 
 export default function HomePageRoutes() {
@@ -50,15 +48,14 @@ export default function HomePageRoutes() {
         component={<ViewPostsItem />}
         exact
       />
-      <Route exact path={PATH.NOT_FOUND}>
+      <Route path={PATH.NOT_FOUND}>
         <NotFoundPage />
       </Route>
-      <Route path={PATH.MANAGE_POST}>
-        <Header />
-        <ScrollToTop />
-        <ManagePost />
-        <Footer />
-      </Route>
+      <PrivateAdminRoute
+        path={PATH.MANAGE_POST}
+        component={<ManagePost />}
+        exact
+      />
     </Switch>
   )
 }
