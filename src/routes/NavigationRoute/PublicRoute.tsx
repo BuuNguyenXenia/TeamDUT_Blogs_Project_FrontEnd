@@ -3,7 +3,12 @@ import { Route, Redirect } from "react-router-dom"
 import { PATH } from "src/constants/path"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 
-const PublicRoute = ({ component: Component, restricted, ...rest }: any) => {
+const PublicRoute = ({
+  component: Component,
+  restricted,
+  role,
+  ...rest
+}: any) => {
   const accessToken = LocalStorageService.getItem("accessToken")
   return (
     <Route
