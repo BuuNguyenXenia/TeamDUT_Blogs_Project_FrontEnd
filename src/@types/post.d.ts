@@ -10,12 +10,6 @@ interface ItemPost {
   _id: string
 }
 
-// interface newPost {
-//   title: string,
-//   body: string,
-//   image: string
-// }
-
 interface RouteParams {
   postId: string
 }

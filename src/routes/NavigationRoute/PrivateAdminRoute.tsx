@@ -1,21 +1,16 @@
 import React from "react"
-import { Redirect, Route } from "react-router"
-import LayoutAdmin from "src/components/Layouts/LayoutAdmin"
-import { PATH } from "src/constants/path"
-import { userSelector } from "src/pages/User/User.slice"
-import LocalStorageService from "src/services/LocalStorageService/Storage.service"
-import { useAppSelector } from "src/store/hooks"
+import { Redirect, Route } from "react-router-dom"
+import LayoutAdmin from "src/container/components/Layouts/LayoutAdmin"
+import { PATH } from "src/services/constants/path"
+import { isAdmin } from "src/services/helpers/isAuthen"
 
-const PrivateAdminRoute = ({ component, ...rest }: any) => {
-  const accessToken = LocalStorageService.getItem("accessToken")
-  const user = useAppSelector(userSelector)
-  console.log(!accessToken, user.role)
-
+const PrivateAdminRoute = ({ component, token, role, ...rest }: any) => {
+  const checkRole = isAdmin()
   return (
     <Route
       {...rest}
       render={props =>
-        user.role === "admin" && accessToken ? (
+        checkRole ? (
           <LayoutAdmin childComp={component} />
         ) : (
           <Redirect to={PATH.HOME} />

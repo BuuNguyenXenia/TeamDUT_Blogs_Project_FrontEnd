@@ -1,7 +1,7 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap");
 @import "semantic-ui-css/semantic.min.css";
-@import 'react-quill/dist/quill.snow.css';
+@import "react-quill/dist/quill.snow.css";
 
 :root {
   --date-color: rgba(0, 0, 0, 0.4);
@@ -75,7 +75,6 @@ img {
       }
     }
   }
-
 }
 
 @media (max-width: 992px) {
@@ -102,7 +101,11 @@ img {
       align-items: center;
     }
   }
-
+  .card-review-item-page {
+    :nth-child(2) {
+      margin: 16px 0px;
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -115,9 +118,6 @@ img {
   body {
     font-size: 14px;
   }
-
-
-
 
   //profile
   img.avatar {
@@ -146,19 +146,16 @@ img {
 }
 
 .page {
-
   color: #606266;
   font-size: 14px;
   word-break: break-all;
 }
-
 
 .img-holder {
   display: flex;
   justify-content: center;
   background-color: transparent;
   margin-bottom: 5px;
-
 }
 
 .img {
