@@ -44,7 +44,7 @@ interface Comment {
 }
 
 export const createCommentPost = createAsyncThunk(
-  "post/comment",
+  "comment/post",
   async (comment: Comment, thunkAPI) => {
     try {
       const _id = comment._id
@@ -65,7 +65,7 @@ export const createCommentPost = createAsyncThunk(
 )
 
 export const createLikePost = createAsyncThunk(
-  "post/like",
+  "like/post",
   async (_id: string, thunkAPI) => {
     try {
       const response = await PostsApi.createLike(_id)
@@ -145,29 +145,8 @@ const postsSlice = createSlice({
     [getCommentsPostItem.fulfilled.type]: (state, { payload }) => {
       state.comments = payload
 
-      state.isSuccess = true
-      state.isError = false
-      state.isFetching = false
-
       return state
-    },
-    [getCommentsPostItem.rejected.type]: state => {
-      state.isError = true
-      state.isSuccess = false
-      state.isFetching = false
-    },
-    [getCommentsPostItem.pending.type]: state => {
-      state.isSuccess = false
-      state.isError = false
-      state.isFetching = true
     }
-    // [createCommentPost.fulfilled.type]: (state, { payload }) => {
-    //   state.comments = payload
-    //   return state
-    // },
-    // [createCommentPost.rejected.type]: state => {
-    //   return state
-    // }
   }
 })
 

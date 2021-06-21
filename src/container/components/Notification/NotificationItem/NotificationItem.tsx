@@ -43,7 +43,9 @@ const NotificationItem = ({
       className="notification-item"
       onClick={() => handleChangeViewed(postId, notificationId)}
     >
-      <img src={avatar} alt="avatar" className="image" />
+      <div className="notification-image">
+        <img src={avatar} alt="avatar" className="image" />
+      </div>
       <div className="notification-content">
         <h5>
           {message} <span>trong {title}</span>

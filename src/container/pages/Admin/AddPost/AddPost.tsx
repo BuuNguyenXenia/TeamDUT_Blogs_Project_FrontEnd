@@ -35,13 +35,11 @@ export const AddPost = () => {
   }
 
   const handleAddPost = (title: string, image: string, content: string) => {
-    const params = {
+    let params = {
       title: title,
       image: image,
       body: content
     }
-    console.log(params)
-
     dispatch(createNewPost(params))
     dispatch(dataMyPost(1))
   }
@@ -60,7 +58,6 @@ export const AddPost = () => {
 
       if (response.status === 200) {
         setImage(data.secure_url)
-      } else {
       }
     } catch (err) {
       throw e
@@ -72,7 +69,7 @@ export const AddPost = () => {
       <Form>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={11} md={8}>
+            <Col xs={12} md={8}>
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
@@ -99,7 +96,7 @@ export const AddPost = () => {
         </Form.Group>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={11} md={10}>
+            <Col xs={12} md={10}>
               <Form.Label>Content</Form.Label>
               <ReactQuill
                 theme="snow"

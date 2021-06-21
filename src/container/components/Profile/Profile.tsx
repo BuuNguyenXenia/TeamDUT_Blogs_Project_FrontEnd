@@ -130,23 +130,25 @@ const Profile = () => {
         </Col>
       </Row>
       <Row className="profile-user">
-        <Col md={2} xs={3} className="profile-avatar">
-          <img src={avatar} alt="avatar" className="avatar" />
-          <div className="change-avatar" onClick={handleShow}>
-            <i className="fas fa-camera-retro"></i>
+        <Col xs={12} className="profile-info">
+          <div className="profile-avatar">
+            <img src={avatar} alt="avatar" className="avatar" />
+            <div className="change-avatar" onClick={handleShow}>
+              <i className="fas fa-camera-retro"></i>
+            </div>
           </div>
-        </Col>
-        <Col md={7} xs={6} className="profile-body ">
-          <p className="profile-gmail">{email}</p>
-          <p className="profile-name">@{name}</p>
-        </Col>
-        <Col md={3} xs={2} className="p-0">
-          <Button
-            variant="outline-primary mt-3"
-            onClick={() => HandleShowUser()}
-          >
-            Edit
-          </Button>
+          <div className="profile-body ">
+            <p className="profile-gmail">{email}</p>
+            <p className="profile-name">@{name}</p>
+          </div>
+          <div className="p-0">
+            <Button
+              variant="outline-primary mt-3"
+              onClick={() => HandleShowUser()}
+            >
+              Edit
+            </Button>
+          </div>
         </Col>
       </Row>
 

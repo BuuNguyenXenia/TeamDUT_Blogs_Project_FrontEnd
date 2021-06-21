@@ -12,14 +12,18 @@ export const PostItemPage = styled.div`
     padding: 5px 15px;
   }
   .lastsNews-item {
+    display: flex;
+    align-items: center;
     padding: 10px;
   }
   .card-lastsNews-image {
+    height: 120px;
     display: block;
     border-radius: 12px;
+
     img {
+      height: 100%;
       width: 100%;
-      height: 150px;
       border-radius: var(--radius);
     }
     :hover {
@@ -33,8 +37,13 @@ export const PostItemPage = styled.div`
     }
   }
   .card-lastsNews-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
     font-size: 1.2em;
-    display: block;
     color: var(--post-title-color);
     font-weight: 700;
     line-height: 1.3em;
@@ -47,6 +56,12 @@ export const PostItemPage = styled.div`
     }
   }
   .card-lastsNews-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
     font-size: 0.875em;
     color: var(--text-color);
     margin: 8px 0px;
@@ -99,5 +114,56 @@ export const PostItemPage = styled.div`
   .dropdown-menu.show {
     border: 1px solid var(--border-color);
     background-color: var(--post-card-bg);
+  }
+
+  @media (max-width: 992px) {
+    .card-lastsNews-image {
+      height: 120px;
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: var(--radius);
+      }
+      :hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .card-lastsNews-image {
+      height: 120px;
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: var(--radius);
+      }
+      :hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .card-lastsNews-image {
+      height: 200px;
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: var(--radius);
+      }
+      :hover {
+        opacity: 0.8;
+      }
+    }
   }
 `

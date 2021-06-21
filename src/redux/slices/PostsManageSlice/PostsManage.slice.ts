@@ -61,12 +61,26 @@ export const createNewPost = createAsyncThunk(
   "post/newPost",
   async (params: newPost, thunkAPI) => {
     try {
-      const response = await PostsApi.createPost(params)
-      const data = await response.data
+      if (params.image.length > 0) {
+        const response = await PostsApi.createPost(params)
+        const data = await response.data
 
-      if (response.status === 200) {
-        toast.success(MSG.CREATE_NEW_POST_SUCCESS)
-        return data
+        if (response.status === 200) {
+          toast.success(MSG.CREATE_NEW_POST_SUCCESS)
+          return data
+        }
+      } else {
+        const paramsPost = {
+          title: params.title,
+          body: params.body
+        }
+        const response = await PostsApi.createPost(paramsPost)
+        const data = await response.data
+
+        if (response.status === 200) {
+          toast.success(MSG.CREATE_NEW_POST_SUCCESS)
+          return data
+        }
       }
     } catch (err) {
       toast.error(MSG.CREATE_NEW_POST_ERROR)

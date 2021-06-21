@@ -24,7 +24,7 @@ export default function ReviewItem(props) {
     <ItemReview className="card-review-item-page">
       <Card className="card-review-item">
         <Row className="card-item">
-          <Col sm={4} className="p-0">
+          <Col sm={4} className="p-0 card-item-image">
             <Link
               to={`${PATH.ITEM_POST}/${postId}`}
               className="card-image"
@@ -33,7 +33,7 @@ export default function ReviewItem(props) {
               <Card.Img src={image} />
             </Link>
           </Col>
-          <Col sm={8} className="p-0">
+          <Col sm={8} className="p-0 card-review-item-content">
             <Card.Body className="card-review-body">
               <Card.Title className="card-review-title mb-1">
                 <Link

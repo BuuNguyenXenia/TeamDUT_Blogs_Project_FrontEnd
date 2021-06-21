@@ -33,4 +33,36 @@ export const TopReview = styled.div`
       color: var(--main-color);
     }
   }
+
+  @media (max-width: 992px) {
+    .card-review-link {
+      height: 300px;
+      width: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .card-review-link {
+      height: 280px;
+      width: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .card-review-link {
+      height: 250px;
+      width: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
 `

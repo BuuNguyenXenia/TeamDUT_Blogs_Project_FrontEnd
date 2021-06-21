@@ -30,6 +30,11 @@ export const Item = styled.div`
       transition: opacity 0.25s ease;
     }
   }
+  .entry-image-wrap {
+    img {
+      height: 200px;
+    }
+  }
   .entry-header {
     z-index: 5;
     position: absolute;

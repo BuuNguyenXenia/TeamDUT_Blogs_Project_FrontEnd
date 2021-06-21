@@ -96,7 +96,7 @@ const EditPost = () => {
       <Form>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={11} md={8}>
+            <Col xs={12} md={8}>
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
@@ -115,7 +115,7 @@ const EditPost = () => {
             <Col xs={12} className="mb-3">
               <img src={image} alt="" className="image-post" />
             </Col>
-            <Col xs={11}>
+            <Col xs={12}>
               <Form.File
                 type="file"
                 name="image-upload"
@@ -126,7 +126,7 @@ const EditPost = () => {
         </Form.Group>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={11} md={10}>
+            <Col xs={12} md={10}>
               <Form.Label>Content</Form.Label>
               <ReactQuill
                 theme="snow"

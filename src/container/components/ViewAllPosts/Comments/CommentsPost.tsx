@@ -12,6 +12,7 @@ import CommentsItem from "./CommentsItem/CommentsItem"
 
 const CommentsPost = props => {
   const { email, avatar, comments, postId, name } = props
+  console.log(comments)
 
   const [userComment, setUserComment] = useState<string>("")
   const dispatch = useAppDispatch()
@@ -48,7 +49,7 @@ const CommentsPost = props => {
     }
   }
   return (
-    <Comment.Group className="mr-0">
+    <Comment.Group className="mr-0" id="comments">
       {Object.keys(comments).length !== 0 &&
         comments.map((el, i) => (
           <CommentsItem {...el} key={"comment-item-" + i} />

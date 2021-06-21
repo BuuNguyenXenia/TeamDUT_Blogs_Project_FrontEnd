@@ -18,6 +18,7 @@ export const ProfileStyle = styled.div`
     }
   }
   .profile-avatar {
+    position: relative;
     img {
       width: 100px;
       height: 100px;
@@ -29,7 +30,11 @@ export const ProfileStyle = styled.div`
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border-color);
   }
+  .profile-info {
+    display: flex;
+  }
   .profile-body {
+    padding: 0px 30px;
     font-size: 1.3em;
     .profile-gmail {
       color: #5488c7;
@@ -52,7 +57,7 @@ export const ProfileStyle = styled.div`
   }
   .change-avatar {
     position: absolute;
-    right: 8px;
+    right: 0px;
     bottom: 0px;
     background-color: white;
     width: 35px;
@@ -70,6 +75,22 @@ export const ProfileStyle = styled.div`
     color: var(--meta-color);
   }
 
+  @media (max-width: 768px) {
+    img.avatar {
+      width: 80px;
+      height: 80px;
+    }
+    .change-avatar {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      background-color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
   @media (max-width: 576px) {
     //profile
     img.avatar {
@@ -79,7 +100,7 @@ export const ProfileStyle = styled.div`
 
     .change-avatar {
       position: absolute;
-      right: 13px;
+      right: 0px;
       bottom: 0px;
       background-color: white;
       width: 25px;

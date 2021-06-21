@@ -10,6 +10,9 @@ export const ItemReview = styled.div`
     border: 1px solid var(--border-color);
     background-color: var(--post-card-bg);
   }
+  .card-review-item-content {
+    margin: 0;
+  }
   .card-review-title {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -21,10 +24,17 @@ export const ItemReview = styled.div`
     padding: 8px;
     margin: 0px;
   }
+  .card-item-image {
+    display: flex;
+    align-items: center;
+  }
   .card-image {
+    height: 70px;
+    width: 100%;
     display: block;
     border-radius: 12px;
     img {
+      height: 100%;
       width: 100%;
       padding: 4px 5px;
       border-radius: 15px;
@@ -55,4 +65,35 @@ export const ItemReview = styled.div`
     }
   }
 
+  @media (max-width: 992px) {
+    .card-image {
+      height: 120px;
+      width: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .card-image {
+      height: 100px;
+      width: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .card-image {
+      height: 220px;
+      width: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
 `

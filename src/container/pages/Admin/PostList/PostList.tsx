@@ -6,12 +6,11 @@ import Loading from "src/container/components/Loading/Loading"
 
 const PostList = props => {
   const { dataPost, isSuccess, isFetching } = props
-  console.log(dataPost)
 
   return (
     <LatestNewsPage className="mt-4">
       <div className="view-list">
-        {isFetching && <Loading height={20} />}
+        {isFetching && <Loading height={200} />}
         {isSuccess
           ? dataPost.posts.map((el, i) => (
               <PostItem {...el} key={"myPost" + i} />

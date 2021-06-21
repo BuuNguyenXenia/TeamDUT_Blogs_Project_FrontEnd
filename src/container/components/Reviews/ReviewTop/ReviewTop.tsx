@@ -26,6 +26,7 @@ export default function ReviewTop(props) {
         <Link
           to={`${PATH.ITEM_POST}/${postId}`}
           onClick={() => handleItemPost(postId)}
+          className="card-review-link"
         >
           <Card.Img src={image} className="card-review-image" />
         </Link>

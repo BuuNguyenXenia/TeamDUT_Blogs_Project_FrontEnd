@@ -69,7 +69,6 @@ export default function Routes() {
           path={`${PATH.ITEM_POST}/:postId`}
           checkHome={false}
           component={<ViewPostsItem />}
-          exact
         />
         <PrivateAdminRoute
           path={PATH.MANAGE_POST}

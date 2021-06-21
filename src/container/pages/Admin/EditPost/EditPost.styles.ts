@@ -21,6 +21,7 @@ export const EditPostPage = styled.div`
   }
 
   .image-post {
+    max-width: 100%;
     width: 300px;
   }
   .quill {

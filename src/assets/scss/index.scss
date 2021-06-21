@@ -4,6 +4,7 @@
 @import "react-quill/dist/quill.snow.css";
 
 :root {
+  --hover-notification: #e9ecef;;
   --date-color: rgba(0, 0, 0, 0.4);
   --post-text-color: #3c4043;
   --button-bg: #1a73e8;
@@ -28,6 +29,7 @@
 }
 
 .dark {
+  --hover-notification: #404040;
   --date-color: rgba(255, 255, 255, 0.4);
   --post-text-color: #b4b6ba;
   --button-bg: #1a73e8;
@@ -233,3 +235,5 @@ a.page-link {
   border: 1px solid var(--border-color);
   background-color: var(--post-card-bg);
 }
+
+
