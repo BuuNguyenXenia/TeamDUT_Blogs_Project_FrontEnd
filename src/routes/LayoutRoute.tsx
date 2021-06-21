@@ -1,7 +1,12 @@
 import React from "react"
-import { Route } from "react-router"
-import Layouts from "src/components/Layouts/Layouts"
+import { Route } from "react-router-dom"
+import Layouts from "src/container/components/Layouts/Layouts"
 
-export const LayoutRoute = ({ component, ...rest }: any) => {
-  return <Route {...rest} render={props => <Layouts childComp={component} />} />
+export const LayoutRoute = ({ component, checkHome, ...rest }: any) => {
+  return (
+    <Route
+      {...rest}
+      render={props => <Layouts childComp={component} check={checkHome} />}
+    />
+  )
 }

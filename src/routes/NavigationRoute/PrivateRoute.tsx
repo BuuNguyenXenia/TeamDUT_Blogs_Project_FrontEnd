@@ -1,19 +1,19 @@
 import React from "react"
-import { Redirect, Route } from "react-router"
-import Layouts from "src/components/Layouts/Layouts"
-import { PATH } from "src/constants/path"
-import LocalStorageService from "src/services/LocalStorageService/Storage.service"
+import { Redirect, Route } from "react-router-dom"
+import Layouts from "src/container/components/Layouts/Layouts"
+import { PATH } from "src/services/constants/path"
+import { authenticated } from "src/services/helpers/isAuthen"
 
 const PrivateRoute = ({ component, ...rest }: any) => {
-  const accessToken = LocalStorageService.getItem("accessToken")
+  const isLogin = authenticated()
   return (
     <Route
       {...rest}
       render={props =>
-        !accessToken ? (
+        !isLogin ? (
           <Redirect to={PATH.HOME} />
         ) : (
-          <Layouts childComp={component} />
+          <Layouts childComp={component} check={false} />
         )
       }
     />
